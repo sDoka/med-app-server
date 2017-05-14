@@ -1,0 +1,9 @@
+Bundle-Name: med-app-service-builder-api
+Bundle-SymbolicName: ru.dokstrudio.med.srv.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	ru.dokstrudio.med.srv.exception,\
+	ru.dokstrudio.med.srv.model,\
+	ru.dokstrudio.med.srv.service,\
+	ru.dokstrudio.med.srv.service.persistence
+-includeresource: META-INF/service.xml=../med-app-service-builder-service/service.xml

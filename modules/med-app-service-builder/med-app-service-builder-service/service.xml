@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="ru.dokstrudio.med.srv">
+	<namespace>med</namespace>
+
+	<!-- Test Unit - related tables -->
+	<entity name="TestUnit" local-service="true" remote-service="false"
+		uuid="false">
+		<column name="testUnitId" type="long" primary="true"></column>
+		<column name="number" type="long"></column>
+		<column name="specializationId" type="int"></column>
+		<column name="questionText" type="String"></column>
+		<column name="questionType" type="int"></column>
+		<column name="questionDlFileEntryId" type="long"></column>
+		<column name="isActual" type="boolean"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+
+		<finder return-type="Collection" name="TestUnitNumber">
+			<finder-column name="number"></finder-column>
+		</finder>
+
+		<finder return-type="Collection" name="SpecializationId">
+			<finder-column name="specializationId"></finder-column>
+		</finder>
+	</entity>
+
+	<entity name="TestUnitAnswer" local-service="true"
+		remote-service="false" uuid="false">
+		<column name="testUnitAnswerId" type="long" primary="true"></column>
+		<column name="testUnitId" type="long"></column>
+		<column name="answerText" type="String"></column>
+		<column name="answerType" type="int"></column>
+		<column name="answerDlFileEntryId" type="long"></column>
+		<column name="isCorrent" type="boolean"></column>
+
+		<finder return-type="Collection" name="TestUnitId">
+			<finder-column name="testUnitId"></finder-column>
+		</finder>
+	</entity>
+
+	<entity name="TestUnitAttempt" local-service="true"
+		remote-service="false" uuid="false">
+		<column name="testUnitAttemptId" type="long" primary="true"></column>
+		<column name="userId" type="long"></column>
+		<column name="testUnitId" type="long"></column>
+		<column name="testUnitAnswerId" type="long"></column>
+		<column name="submitTime" type="Date"></column>
+
+		<finder return-type="Collection" name="TestUnitId">
+			<finder-column name="testUnitAnswerId"></finder-column>
+		</finder>
+
+	</entity>
+
+	<entity name="TestUnitSpecialization" local-service="true"
+		remote-service="false" uuid="false">
+		<column name="specializationId" type="long" primary="true"></column>
+		<column name="nameLocalizationKey" type="String"></column>
+
+	</entity>
+
+	<!-- Statistics, devices, accounts -->
+	<entity name="UserAccount" local-service="true" remote-service="false"
+		uuid="false">
+		<column name="userId" type="long" primary="true"></column>
+		<column name="accountTypeId" type="long" primary="true"></column>
+		<column name="activationDate" type="Date"></column>
+		<column name="expirationDate" type="Date"></column>
+	</entity>
+	
+	<entity name="ApplicationAccount" local-service="true" remote-service="false"
+		uuid="false">
+		<column name="accountTypeId" type="long" primary="true"></column>
+		<column name="name" type="String"></column>
+		<column name="description" type="String"></column>
+		<column name="durationDays" type="long"></column>
+	</entity>
+	
+	<entity name="UserDevice" local-service="true" remote-service="false"
+		uuid="false">
+		<column name="deviceId" type="long" primary="true"></column>
+		<column name="userId" type="long"></column>
+		<column name="deviceTypeId" type="int"></column>
+		<column name="deviceKey" type="String"></column>
+		<column name="operatingSystem" type="String"></column>
+	</entity>
+	<entity name="ApplicationUsage" local-service="true"
+		remote-service="false" uuid="false">
+		<column name="applicationUserId" type="long" primary="true"></column>
+		<column name="userId" type="long"></column>
+		<column name="ipAddress" type="String"></column>
+		<column name="deviceId" type="long"></column>
+		<column name="actionType" type="int"></column>
+		<column name="actionTime" type="Date"></column>
+
+		<finder return-type="Collection" name="DeviceId">
+			<finder-column name="deviceId"></finder-column>
+		</finder>
+	</entity>
+</service-builder>

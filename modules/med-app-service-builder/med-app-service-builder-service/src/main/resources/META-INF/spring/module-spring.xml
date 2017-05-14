@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="ru.dokstrudio.med.srv.service.impl.ApplicationAccountLocalServiceImpl" id="ru.dokstrudio.med.srv.service.ApplicationAccountLocalService" />
+	<bean class="ru.dokstrudio.med.srv.service.persistence.impl.ApplicationAccountPersistenceImpl" id="ru.dokstrudio.med.srv.service.persistence.ApplicationAccountPersistence" parent="basePersistence" />
+	<bean class="ru.dokstrudio.med.srv.service.impl.ApplicationUsageLocalServiceImpl" id="ru.dokstrudio.med.srv.service.ApplicationUsageLocalService" />
+	<bean class="ru.dokstrudio.med.srv.service.persistence.impl.ApplicationUsagePersistenceImpl" id="ru.dokstrudio.med.srv.service.persistence.ApplicationUsagePersistence" parent="basePersistence" />
+	<bean class="ru.dokstrudio.med.srv.service.impl.TestUnitLocalServiceImpl" id="ru.dokstrudio.med.srv.service.TestUnitLocalService" />
+	<bean class="ru.dokstrudio.med.srv.service.persistence.impl.TestUnitPersistenceImpl" id="ru.dokstrudio.med.srv.service.persistence.TestUnitPersistence" parent="basePersistence" />
+	<bean class="ru.dokstrudio.med.srv.service.impl.TestUnitAnswerLocalServiceImpl" id="ru.dokstrudio.med.srv.service.TestUnitAnswerLocalService" />
+	<bean class="ru.dokstrudio.med.srv.service.persistence.impl.TestUnitAnswerPersistenceImpl" id="ru.dokstrudio.med.srv.service.persistence.TestUnitAnswerPersistence" parent="basePersistence" />
+	<bean class="ru.dokstrudio.med.srv.service.impl.TestUnitAttemptLocalServiceImpl" id="ru.dokstrudio.med.srv.service.TestUnitAttemptLocalService" />
+	<bean class="ru.dokstrudio.med.srv.service.persistence.impl.TestUnitAttemptPersistenceImpl" id="ru.dokstrudio.med.srv.service.persistence.TestUnitAttemptPersistence" parent="basePersistence" />
+	<bean class="ru.dokstrudio.med.srv.service.impl.TestUnitSpecializationLocalServiceImpl" id="ru.dokstrudio.med.srv.service.TestUnitSpecializationLocalService" />
+	<bean class="ru.dokstrudio.med.srv.service.persistence.impl.TestUnitSpecializationPersistenceImpl" id="ru.dokstrudio.med.srv.service.persistence.TestUnitSpecializationPersistence" parent="basePersistence" />
+	<bean class="ru.dokstrudio.med.srv.service.impl.UserAccountLocalServiceImpl" id="ru.dokstrudio.med.srv.service.UserAccountLocalService" />
+	<bean class="ru.dokstrudio.med.srv.service.persistence.impl.UserAccountPersistenceImpl" id="ru.dokstrudio.med.srv.service.persistence.UserAccountPersistence" parent="basePersistence" />
+	<bean class="ru.dokstrudio.med.srv.service.impl.UserDeviceLocalServiceImpl" id="ru.dokstrudio.med.srv.service.UserDeviceLocalService" />
+	<bean class="ru.dokstrudio.med.srv.service.persistence.impl.UserDevicePersistenceImpl" id="ru.dokstrudio.med.srv.service.persistence.UserDevicePersistence" parent="basePersistence" />
+</beans>

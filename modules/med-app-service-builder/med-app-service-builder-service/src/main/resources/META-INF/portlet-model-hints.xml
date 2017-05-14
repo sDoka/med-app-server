@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="ru.dokstrudio.med.srv.model.ApplicationAccount">
+		<field name="accountTypeId" type="long" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+		<field name="durationDays" type="long" />
+	</model>
+	<model name="ru.dokstrudio.med.srv.model.ApplicationUsage">
+		<field name="applicationUserId" type="long" />
+		<field name="userId" type="long" />
+		<field name="ipAddress" type="String" />
+		<field name="deviceId" type="long" />
+		<field name="actionType" type="int" />
+		<field name="actionTime" type="Date" />
+	</model>
+	<model name="ru.dokstrudio.med.srv.model.TestUnit">
+		<field name="testUnitId" type="long" />
+		<field name="number" type="long" />
+		<field name="specializationId" type="int" />
+		<field name="questionText" type="String">
+			<hint name="max-length">2000</hint>
+		</field>
+		<field name="questionType" type="int" />
+		<field name="questionDlFileEntryId" type="long" />
+		<field name="isActual" type="boolean" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="ru.dokstrudio.med.srv.model.TestUnitAnswer">
+		<field name="testUnitAnswerId" type="long" />
+		<field name="testUnitId" type="long" />
+		<field name="answerText" type="String">
+			<hint name="max-length">2000</hint>
+		</field>
+		<field name="answerType" type="int" />
+		<field name="answerDlFileEntryId" type="long" />
+		<field name="isCorrent" type="boolean" />
+	</model>
+	<model name="ru.dokstrudio.med.srv.model.TestUnitAttempt">
+		<field name="testUnitAttemptId" type="long" />
+		<field name="userId" type="long" />
+		<field name="testUnitId" type="long" />
+		<field name="testUnitAnswerId" type="long" />
+		<field name="submitTime" type="Date" />
+	</model>
+	<model name="ru.dokstrudio.med.srv.model.TestUnitSpecialization">
+		<field name="specializationId" type="long" />
+		<field name="nameLocalizationKey" type="String" />
+	</model>
+	<model name="ru.dokstrudio.med.srv.model.UserAccount">
+		<field name="userId" type="long" />
+		<field name="accountTypeId" type="long" />
+		<field name="activationDate" type="Date" />
+		<field name="expirationDate" type="Date" />
+	</model>
+	<model name="ru.dokstrudio.med.srv.model.UserDevice">
+		<field name="deviceId" type="long" />
+		<field name="userId" type="long" />
+		<field name="deviceTypeId" type="int" />
+		<field name="deviceKey" type="String" />
+		<field name="operatingSystem" type="String" />
+	</model>
+</model-hints>

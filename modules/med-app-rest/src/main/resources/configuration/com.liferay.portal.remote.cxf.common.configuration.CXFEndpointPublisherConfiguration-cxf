@@ -1,0 +1,2 @@
+contextPath=/med-app-rest
+authVerifierProperties=auth.verifier.BasicAuthHeaderAuthVerifier.urls.includes=*

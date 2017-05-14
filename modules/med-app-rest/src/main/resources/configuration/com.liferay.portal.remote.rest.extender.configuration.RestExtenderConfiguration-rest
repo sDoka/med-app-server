@@ -1,0 +1,2 @@
+contextPaths=/med-app-rest
+jaxRsServiceFilterStrings=(component.name=ru.dokstuduio.med.rest.usermanagment.UserManagmentRest)

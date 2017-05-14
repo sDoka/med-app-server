@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="ru.dokstrudio.med.srv.model.ApplicationAccount" />
+	<import class="ru.dokstrudio.med.srv.model.ApplicationUsage" />
+	<import class="ru.dokstrudio.med.srv.model.TestUnit" />
+	<import class="ru.dokstrudio.med.srv.model.TestUnitAnswer" />
+	<import class="ru.dokstrudio.med.srv.model.TestUnitAttempt" />
+	<import class="ru.dokstrudio.med.srv.model.TestUnitSpecialization" />
+	<import class="ru.dokstrudio.med.srv.model.UserAccount" />
+	<import class="ru.dokstrudio.med.srv.model.UserDevice" />
+	<class name="ru.dokstrudio.med.srv.model.impl.ApplicationAccountImpl" table="med_ApplicationAccount">
+		<id name="accountTypeId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="durationDays" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="ru.dokstrudio.med.srv.model.impl.ApplicationUsageImpl" table="med_ApplicationUsage">
+		<id name="applicationUserId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="ipAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="deviceId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="actionType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="actionTime" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="ru.dokstrudio.med.srv.model.impl.TestUnitImpl" table="med_TestUnit">
+		<id name="testUnitId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property column="number_" name="number" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="specializationId" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="questionText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="questionType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="questionDlFileEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="isActual" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="ru.dokstrudio.med.srv.model.impl.TestUnitAnswerImpl" table="med_TestUnitAnswer">
+		<id name="testUnitAnswerId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="testUnitId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="answerText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="answerType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="answerDlFileEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="isCorrent" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="ru.dokstrudio.med.srv.model.impl.TestUnitAttemptImpl" table="med_TestUnitAttempt">
+		<id name="testUnitAttemptId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="testUnitId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="testUnitAnswerId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="submitTime" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="ru.dokstrudio.med.srv.model.impl.TestUnitSpecializationImpl" table="med_TestUnitSpecialization">
+		<id name="specializationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="nameLocalizationKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="ru.dokstrudio.med.srv.model.impl.UserAccountImpl" table="med_UserAccount">
+		<composite-id class="ru.dokstrudio.med.srv.service.persistence.UserAccountPK" name="primaryKey">
+			<key-property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="accountTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
+		<property name="activationDate" type="org.hibernate.type.TimestampType" />
+		<property name="expirationDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="ru.dokstrudio.med.srv.model.impl.UserDeviceImpl" table="med_UserDevice">
+		<id name="deviceId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="deviceTypeId" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="deviceKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="operatingSystem" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>
