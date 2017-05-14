@@ -1,0 +1,8 @@
+Bundle-Name: med-app-parser
+Bundle-SymbolicName: med.app.parser
+Bundle-Version: 1.0.0
+Import-Package: \
+	ru.dokstrudio.med.srv.exception,\
+	ru.dokstrudio.med.srv.service,\
+	ru.dokstrudio.med.srv.model,\
+	*
