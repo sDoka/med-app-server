@@ -14,7 +14,12 @@ public class ApplicationUser {
 	Date lastSynchronizationDate;
 	
 	public ApplicationUser(User user) {
-		
+		this.userId = user.getUserId();
+		this.userName = user.getFirstName();
+		this.email = user.getEmailAddress();
+		//TODO implement device binding and synchronization upd
+		this.actualDeviceId = 1;
+		this.lastSynchronizationDate = new Date();
 	}
 
 	@Override

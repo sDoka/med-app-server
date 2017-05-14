@@ -206,6 +206,14 @@ public class UserDeviceLocalServiceWrapper implements UserDeviceLocalService,
 		return _userDeviceLocalService.createUserDevice(deviceId);
 	}
 
+	@Override
+	public ru.dokstrudio.med.srv.model.UserDevice createUserDevice(
+		long userId, java.lang.String deviceKey, int deviceType,
+		java.lang.String operatingSystem) {
+		return _userDeviceLocalService.createUserDevice(userId, deviceKey,
+			deviceType, operatingSystem);
+	}
+
 	/**
 	* Deletes the user device with the primary key from the database. Also notifies the appropriate model listeners.
 	*

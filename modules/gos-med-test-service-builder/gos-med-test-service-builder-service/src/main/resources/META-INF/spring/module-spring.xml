@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="ru.dokstudio.service.impl.TestItemAnswerLocalServiceImpl" id="ru.dokstudio.service.TestItemAnswerLocalService" />
+	<bean class="ru.dokstudio.service.impl.TestItemAnswerServiceImpl" id="ru.dokstudio.service.TestItemAnswerService" />
+	<bean class="ru.dokstudio.service.persistence.impl.TestItemAnswerPersistenceImpl" id="ru.dokstudio.service.persistence.TestItemAnswerPersistence" parent="basePersistence" />
+	<bean class="ru.dokstudio.service.impl.TestItemAttemptLocalServiceImpl" id="ru.dokstudio.service.TestItemAttemptLocalService" />
+	<bean class="ru.dokstudio.service.impl.TestItemAttemptServiceImpl" id="ru.dokstudio.service.TestItemAttemptService" />
+	<bean class="ru.dokstudio.service.persistence.impl.TestItemAttemptPersistenceImpl" id="ru.dokstudio.service.persistence.TestItemAttemptPersistence" parent="basePersistence" />
+	<bean class="ru.dokstudio.service.impl.TestItemQuestionLocalServiceImpl" id="ru.dokstudio.service.TestItemQuestionLocalService" />
+	<bean class="ru.dokstudio.service.impl.TestItemQuestionServiceImpl" id="ru.dokstudio.service.TestItemQuestionService" />
+	<bean class="ru.dokstudio.service.persistence.impl.TestItemQuestionPersistenceImpl" id="ru.dokstudio.service.persistence.TestItemQuestionPersistence" parent="basePersistence" />
+</beans>

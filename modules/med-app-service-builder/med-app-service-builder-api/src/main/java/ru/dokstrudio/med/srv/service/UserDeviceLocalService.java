@@ -183,6 +183,9 @@ public interface UserDeviceLocalService extends BaseLocalService,
 	*/
 	public UserDevice createUserDevice(long deviceId);
 
+	public UserDevice createUserDevice(long userId, java.lang.String deviceKey,
+		int deviceType, java.lang.String operatingSystem);
+
 	/**
 	* Deletes the user device with the primary key from the database. Also notifies the appropriate model listeners.
 	*

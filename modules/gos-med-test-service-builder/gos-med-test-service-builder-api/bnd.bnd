@@ -1,0 +1,9 @@
+Bundle-Name: gos-med-test-service-builder-api
+Bundle-SymbolicName: ru.dokstudio.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	ru.dokstudio.exception,\
+	ru.dokstudio.model,\
+	ru.dokstudio.service,\
+	ru.dokstudio.service.persistence
+-includeresource: META-INF/service.xml=../gos-med-test-service-builder-service/service.xml
