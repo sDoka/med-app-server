@@ -49,10 +49,15 @@ public class UserAccountLocalServiceImpl extends UserAccountLocalServiceBaseImpl
 	 * Never reference this class directly. Always use {@link
 	 * ru.dokstrudio.med.srv.service.UserAccountLocalServiceUtil} to access the
 	 * user account local service.
-	 */	
+	 */
 	public UserAccount createUserAccount(long userId, long accountTypeId) throws PortalException {
+		UserAccount existingUserAccount = null;
 		UserAccountPK userAccountPK = new UserAccountPK(userId, accountTypeId);
-		if (userAccountLocalService.getUserAccount(userAccountPK) != null) {
+		try {
+			existingUserAccount = userAccountLocalService.getUserAccount(userAccountPK);
+		} catch (PortalException e) {/*it's ok. There shouldn't be such account */}
+		
+		if (existingUserAccount != null) {
 			throw new PortalException("User wih id = " + userId + " and account type = " + accountTypeId);
 		}
 		UserAccount userAccount = userAccountLocalService.createUserAccount(userAccountPK);

@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -21,6 +22,7 @@ import org.osgi.service.component.annotations.Reference;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.CompanyConstants;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.User;
@@ -31,8 +33,10 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
-import ru.dokstrudio.med.srv.model.UserAccount;
 import ru.dokstrudio.med.srv.service.UserAccountLocalService;
+import ru.dokstrudio.med.srv.service.UserDeviceLocalService;
+import ru.dokstuduio.med.rest.common.constants.AccountTypes;
+import ru.dokstuduio.med.rest.common.constants.DeviceTypes;
 import ru.dokstuduio.med.rest.common.constants.ResponseCodes;
 import ru.dokstuduio.med.rest.common.util.RestResponseUtil;
 import ru.dokstuduio.med.rest.usermanagment.model.ApplicationUser;
@@ -47,14 +51,18 @@ public class UserManagmentRest extends Application {
 	}
 
 	private UserLocalService _userLocalService;
-
 	@Reference(unbind = "-")
 	protected void setUserLocalService(UserLocalService userLocalService) {
 		_userLocalService = userLocalService;
 	}
+	
+	private UserDeviceLocalService _userDeviceService;
+	@Reference(unbind = "-")
+	protected void setUserDeviceLocalService(UserDeviceLocalService userDeviceService) {
+		_userDeviceService = userDeviceService;
+	}
 
 	private RoleLocalService _roleService;
-
 	@Reference(unbind = "-")
 	protected void setUserService(RoleLocalService roleService) {
 		_roleService = roleService;
@@ -70,7 +78,7 @@ public class UserManagmentRest extends Application {
 	@GET
 	@Produces("text/plain")
 	public String working() {
-		return "It works!";
+		return "Here should be rest-markdown...";
 	}
 
 	@POST
@@ -91,7 +99,7 @@ public class UserManagmentRest extends Application {
 		long companyId = PortalUtil.getDefaultCompanyId();
 		long creatorUserId = 0;
 		boolean autoPassword = false;
-		boolean autoScreenName = false;
+		boolean autoScreenName = true;
 		boolean sendEmail = false;
 		int prefixId = 1;
 		int suffixId = 1;
@@ -125,12 +133,13 @@ public class UserManagmentRest extends Application {
 					groupIds, organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 
 			_userLocalService.updateUser(user);
-			UserAccount userAccount = _userAccountService.createUserAccount(user.getUserId(), AccountType.FREE_ACCOUNT.getAccountTypeId());
-			
+			_userAccountService.createUserAccount(user.getUserId(), AccountTypes.FREE_ACCOUNT.getAccountTypeId());
+			//TODO implement user device creation and usage
+			_userDeviceService.createUserDevice(user.getUserId(), deviceKey, DeviceTypes.SMART_PHONE.getDeviceTypeId(), "android-hardcoded");
 			ApplicationUser applicationUser = new ApplicationUser(user);
 			response = RestResponseUtil.createSuccessResponse(applicationUser.toString());
 		} catch (Exception e) {
-			response = e.getMessage();
+			response = RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, e.getMessage());
 			log.error("Error occured : " + e.getMessage());
 		}
 
@@ -148,18 +157,19 @@ public class UserManagmentRest extends Application {
 		String response;
 		try {
 			user = _userLocalService.getUserByEmailAddress(PortalUtil.getDefaultCompanyId(), email);
+
+			long authResult = _userLocalService.authenticateForBasic(PortalUtil.getDefaultCompanyId(), CompanyConstants.AUTH_TYPE_EA, email, password);
 			log.info("### User found..");
-			if (!user.getPassword().equals(password)) {
-				// TODO return error response
-				log.error("### User's password is incorrect. Aborting...");
-				return "Error. Incorrect password!";
+			if (authResult == 0) {
+				log.error("### User's password is incorrect...");
+				return RestResponseUtil.createErrorResponse(ResponseCodes.FORBIDDEN, "Wrong password");
 			}
 			if (deviceKey != null) {
 				// TODO get device and check, if bound
 				// if not - ?
 			} else {
 				log.error("Device key was not set. Aborting...");
-				return "Error. Device key was not set!";
+				return RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, "Device key is not set");
 			}
 			ApplicationUser applicationUser = new ApplicationUser(user);
 			response = RestResponseUtil.createSuccessResponse(applicationUser.toString());
@@ -172,7 +182,7 @@ public class UserManagmentRest extends Application {
 	}
 
 	@GET
-	@Path("/get-user")
+	@Path("/silent-get-user")
 	@Produces("text/plain")
 	public String morning(@QueryParam("deviceKey") String deviceKey) {
 		log.info("### Invoking user auto authorization... ");
@@ -182,41 +192,10 @@ public class UserManagmentRest extends Application {
 		if (deviceKey != null) {
 			// TODO get device and check, if bound
 			// if not - ?
-			return "This method is not implemented yet.";
+			return RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, "This method is not implemented yet");
 		} else {
 			log.error("Device key was not set. Aborting...");
-			return "Error. Device key was not set!";
+			return RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, "Device key is not set");
 		}
 	}
-
-	private enum AccountType {
-		FREE_ACCOUNT(0, "free-account"), PREMIUM_ACCOUNT(1, "premium-account");
-
-		int accountTypeId;
-		String localizationKey;
-
-		private AccountType(int accountTypeId, String localizationKey) {
-			this.accountTypeId = accountTypeId;
-			this.localizationKey = localizationKey;
-		}
-
-		public int getAccountTypeId() {
-			return accountTypeId;
-		}
-
-		public String getLocalizationKey() {
-			return localizationKey;
-		}
-
-		public AccountType getAccountTypeById(int accountTypeId) {
-
-			for (AccountType accountType : AccountType.values()) {
-				if (accountType.getAccountTypeId() == accountTypeId) {
-					return accountType;
-				}
-			}
-			return FREE_ACCOUNT;
-		}
-	}
-
 }

@@ -19,6 +19,6 @@ public class SynchronizationRest extends Application {
 	@GET
 	@Produces("text/plain")
 	public String working() {
-		return "It works!";
+		return "Synchronization works!";
 	}
 }

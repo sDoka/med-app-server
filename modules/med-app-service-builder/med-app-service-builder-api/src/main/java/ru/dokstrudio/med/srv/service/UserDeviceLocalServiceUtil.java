@@ -198,6 +198,14 @@ public class UserDeviceLocalServiceUtil {
 		return getService().createUserDevice(deviceId);
 	}
 
+	public static ru.dokstrudio.med.srv.model.UserDevice createUserDevice(
+		long userId, java.lang.String deviceKey, int deviceType,
+		java.lang.String operatingSystem) {
+		return getService()
+				   .createUserDevice(userId, deviceKey, deviceType,
+			operatingSystem);
+	}
+
 	/**
 	* Deletes the user device with the primary key from the database. Also notifies the appropriate model listeners.
 	*

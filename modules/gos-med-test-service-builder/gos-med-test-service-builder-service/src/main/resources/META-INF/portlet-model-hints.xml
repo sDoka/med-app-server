@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="ru.dokstudio.model.TestItemAnswer">
+		<field name="uuid" type="String" />
+		<field name="answerId" type="long" />
+		<field name="questionId" type="long" />
+		<field name="answer" type="String">
+			<hint name="max-length">800</hint>
+		</field>
+		<field name="isCorrect" type="boolean" />
+	</model>
+	<model name="ru.dokstudio.model.TestItemAttempt">
+		<field name="uuid" type="String" />
+		<field name="attemptId" type="long" />
+		<field name="questionId" type="long" />
+		<field name="answerId" type="long" />
+		<field name="isSuccessAttempt" type="boolean" />
+		<field name="attemptDate" type="Date" />
+	</model>
+	<model name="ru.dokstudio.model.TestItemQuestion">
+		<field name="uuid" type="String" />
+		<field name="questionId" type="long" />
+		<field name="questionNumber" type="long" />
+		<field name="question" type="String">
+			<hint name="max-length">800</hint>
+		</field>
+		<field name="modifiedDate" type="Date" />
+	</model>
+</model-hints>
