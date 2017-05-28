@@ -138,6 +138,19 @@ public class TestUnitLocalServiceWrapper implements TestUnitLocalService,
 			orderByComparator);
 	}
 
+	@Override
+	public java.util.List<ru.dokstrudio.med.srv.model.TestUnit> findTestUnitByIsActualAndModifiedDateAndSpecializationId(
+		boolean isActual, java.util.Date modifiedDate, long specializationId) {
+		return _testUnitLocalService.findTestUnitByIsActualAndModifiedDateAndSpecializationId(isActual,
+			modifiedDate, specializationId);
+	}
+
+	@Override
+	public java.util.List<ru.dokstrudio.med.srv.model.TestUnit> findTestUnitBySpecializationId(
+		long specializationId) {
+		return _testUnitLocalService.findTestUnitBySpecializationId(specializationId);
+	}
+
 	/**
 	* Returns a range of all the test units.
 	*

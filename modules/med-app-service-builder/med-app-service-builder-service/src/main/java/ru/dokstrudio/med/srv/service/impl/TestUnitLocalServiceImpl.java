@@ -14,6 +14,9 @@
 
 package ru.dokstrudio.med.srv.service.impl;
 
+import java.util.Date;
+import java.util.List;
+
 import aQute.bnd.annotation.ProviderType;
 import ru.dokstrudio.med.srv.exception.NoSuchTestUnitException;
 import ru.dokstrudio.med.srv.model.TestUnit;
@@ -46,5 +49,13 @@ public class TestUnitLocalServiceImpl extends TestUnitLocalServiceBaseImpl {
 	
 	public TestUnit findTestUnitByNumberAndSpecializationId(long number, long specializationId) throws NoSuchTestUnitException {
 		return TestUnitUtil.findByTestUnitNumberAndSpecializationId(number, specializationId);
+	}
+	
+	public List<TestUnit> findTestUnitByIsActualAndModifiedDateAndSpecializationId(boolean isActual, Date modifiedDate, long specializationId) {
+		return TestUnitUtil.findByIsActualAndModifiedDateAndSpecializationId(isActual, modifiedDate, specializationId);
+	}
+	
+	public List<TestUnit> findTestUnitBySpecializationId(long specializationId) {
+		return TestUnitUtil.findBySpecializationId(specializationId);
 	}
 }

@@ -14,9 +14,12 @@
 
 package ru.dokstrudio.med.srv.service.impl;
 
-import aQute.bnd.annotation.ProviderType;
+import java.util.List;
 
+import aQute.bnd.annotation.ProviderType;
+import ru.dokstrudio.med.srv.model.TestUnitAnswer;
 import ru.dokstrudio.med.srv.service.base.TestUnitAnswerLocalServiceBaseImpl;
+import ru.dokstrudio.med.srv.service.persistence.TestUnitAnswerUtil;
 
 /**
  * The implementation of the test unit answer local service.
@@ -40,4 +43,8 @@ public class TestUnitAnswerLocalServiceImpl
 	 *
 	 * Never reference this class directly. Always use {@link ru.dokstrudio.med.srv.service.TestUnitAnswerLocalServiceUtil} to access the test unit answer local service.
 	 */
+	
+	public List<TestUnitAnswer> findByTestUnitId(long testUnitId) {
+		return TestUnitAnswerUtil.findByTestUnitId(testUnitId);
+	}
 }

@@ -32,9 +32,9 @@ public class RestResponseUtil {
 		builder.append(responseCode);
 		builder.append("\",\"responseStatus\":\"");
 		builder.append(responseStatus);
-		builder.append("\",\"responseBody\":\"");
+		builder.append("\",\"responseBody\":");
 		builder.append(responseBody);
-		builder.append("\"}");
+		builder.append("}");
 		return builder.toString();
 	}
 	

@@ -15,6 +15,7 @@
 package ru.dokstrudio.med.srv.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -22,6 +23,7 @@ import aQute.bnd.annotation.ProviderType;
 import ru.dokstrudio.med.srv.model.UserAccount;
 import ru.dokstrudio.med.srv.service.base.UserAccountLocalServiceBaseImpl;
 import ru.dokstrudio.med.srv.service.persistence.UserAccountPK;
+import ru.dokstrudio.med.srv.service.persistence.UserAccountUtil;
 
 /**
  * The implementation of the user account local service.
@@ -68,5 +70,9 @@ public class UserAccountLocalServiceImpl extends UserAccountLocalServiceBaseImpl
 		//Free account is permanent
 		
 		return userAccountLocalService.updateUserAccount(userAccount);
+	}
+	
+	public List<UserAccount> findByUserId(long userId) {
+		return UserAccountUtil.findByUserId(userId);
 	}
 }

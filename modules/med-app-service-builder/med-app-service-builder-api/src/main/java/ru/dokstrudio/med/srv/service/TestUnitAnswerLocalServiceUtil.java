@@ -136,6 +136,11 @@ public class TestUnitAnswerLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	public static java.util.List<ru.dokstrudio.med.srv.model.TestUnitAnswer> findByTestUnitId(
+		long testUnitId) {
+		return getService().findByTestUnitId(testUnitId);
+	}
+
 	/**
 	* Returns a range of all the test unit answers.
 	*

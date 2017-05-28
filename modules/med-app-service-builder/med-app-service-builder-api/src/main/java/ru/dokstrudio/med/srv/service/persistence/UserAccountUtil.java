@@ -112,6 +112,162 @@ public class UserAccountUtil {
 	}
 
 	/**
+	* Returns all the user accounts where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the matching user accounts
+	*/
+	public static List<UserAccount> findByUserId(long userId) {
+		return getPersistence().findByUserId(userId);
+	}
+
+	/**
+	* Returns a range of all the user accounts where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of user accounts
+	* @param end the upper bound of the range of user accounts (not inclusive)
+	* @return the range of matching user accounts
+	*/
+	public static List<UserAccount> findByUserId(long userId, int start, int end) {
+		return getPersistence().findByUserId(userId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the user accounts where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of user accounts
+	* @param end the upper bound of the range of user accounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching user accounts
+	*/
+	public static List<UserAccount> findByUserId(long userId, int start,
+		int end, OrderByComparator<UserAccount> orderByComparator) {
+		return getPersistence()
+				   .findByUserId(userId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the user accounts where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of user accounts
+	* @param end the upper bound of the range of user accounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching user accounts
+	*/
+	public static List<UserAccount> findByUserId(long userId, int start,
+		int end, OrderByComparator<UserAccount> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByUserId(userId, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	* Returns the first user account in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching user account
+	* @throws NoSuchUserAccountException if a matching user account could not be found
+	*/
+	public static UserAccount findByUserId_First(long userId,
+		OrderByComparator<UserAccount> orderByComparator)
+		throws ru.dokstrudio.med.srv.exception.NoSuchUserAccountException {
+		return getPersistence().findByUserId_First(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the first user account in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching user account, or <code>null</code> if a matching user account could not be found
+	*/
+	public static UserAccount fetchByUserId_First(long userId,
+		OrderByComparator<UserAccount> orderByComparator) {
+		return getPersistence().fetchByUserId_First(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the last user account in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching user account
+	* @throws NoSuchUserAccountException if a matching user account could not be found
+	*/
+	public static UserAccount findByUserId_Last(long userId,
+		OrderByComparator<UserAccount> orderByComparator)
+		throws ru.dokstrudio.med.srv.exception.NoSuchUserAccountException {
+		return getPersistence().findByUserId_Last(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the last user account in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching user account, or <code>null</code> if a matching user account could not be found
+	*/
+	public static UserAccount fetchByUserId_Last(long userId,
+		OrderByComparator<UserAccount> orderByComparator) {
+		return getPersistence().fetchByUserId_Last(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the user accounts before and after the current user account in the ordered set where userId = &#63;.
+	*
+	* @param userAccountPK the primary key of the current user account
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next user account
+	* @throws NoSuchUserAccountException if a user account with the primary key could not be found
+	*/
+	public static UserAccount[] findByUserId_PrevAndNext(
+		ru.dokstrudio.med.srv.service.persistence.UserAccountPK userAccountPK,
+		long userId, OrderByComparator<UserAccount> orderByComparator)
+		throws ru.dokstrudio.med.srv.exception.NoSuchUserAccountException {
+		return getPersistence()
+				   .findByUserId_PrevAndNext(userAccountPK, userId,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the user accounts where userId = &#63; from the database.
+	*
+	* @param userId the user ID
+	*/
+	public static void removeByUserId(long userId) {
+		getPersistence().removeByUserId(userId);
+	}
+
+	/**
+	* Returns the number of user accounts where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the number of matching user accounts
+	*/
+	public static int countByUserId(long userId) {
+		return getPersistence().countByUserId(userId);
+	}
+
+	/**
 	* Caches the user account in the entity cache if it is enabled.
 	*
 	* @param userAccount the user account

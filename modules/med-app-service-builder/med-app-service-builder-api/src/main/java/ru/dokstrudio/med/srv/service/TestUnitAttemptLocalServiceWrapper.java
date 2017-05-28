@@ -140,6 +140,13 @@ public class TestUnitAttemptLocalServiceWrapper
 			end, orderByComparator);
 	}
 
+	@Override
+	public java.util.List<ru.dokstrudio.med.srv.model.TestUnitAttempt> findByUserIdAndSubmitTime(
+		long userId, java.util.Date submitTime) {
+		return _testUnitAttemptLocalService.findByUserIdAndSubmitTime(userId,
+			submitTime);
+	}
+
 	/**
 	* Returns a range of all the test unit attempts.
 	*

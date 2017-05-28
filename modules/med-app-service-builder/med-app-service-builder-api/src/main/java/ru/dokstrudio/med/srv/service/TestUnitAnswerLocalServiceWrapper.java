@@ -139,6 +139,12 @@ public class TestUnitAnswerLocalServiceWrapper
 			end, orderByComparator);
 	}
 
+	@Override
+	public java.util.List<ru.dokstrudio.med.srv.model.TestUnitAnswer> findByTestUnitId(
+		long testUnitId) {
+		return _testUnitAnswerLocalService.findByTestUnitId(testUnitId);
+	}
+
 	/**
 	* Returns a range of all the test unit answers.
 	*

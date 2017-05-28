@@ -36,6 +36,7 @@ import ru.dokstrudio.med.srv.model.TestUnitAttempt;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -133,6 +134,9 @@ public interface TestUnitAttemptLocalService extends BaseLocalService,
 	*/
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
+
+	public List<TestUnitAttempt> findByUserIdAndSubmitTime(long userId,
+		Date submitTime);
 
 	/**
 	* Returns a range of all the test unit attempts.

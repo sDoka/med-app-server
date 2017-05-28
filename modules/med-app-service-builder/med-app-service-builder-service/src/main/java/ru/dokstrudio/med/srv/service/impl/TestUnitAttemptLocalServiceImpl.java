@@ -14,9 +14,13 @@
 
 package ru.dokstrudio.med.srv.service.impl;
 
-import aQute.bnd.annotation.ProviderType;
+import java.util.Date;
+import java.util.List;
 
+import aQute.bnd.annotation.ProviderType;
+import ru.dokstrudio.med.srv.model.TestUnitAttempt;
 import ru.dokstrudio.med.srv.service.base.TestUnitAttemptLocalServiceBaseImpl;
+import ru.dokstrudio.med.srv.service.persistence.TestUnitAttemptUtil;
 
 /**
  * The implementation of the test unit attempt local service.
@@ -40,4 +44,7 @@ public class TestUnitAttemptLocalServiceImpl
 	 *
 	 * Never reference this class directly. Always use {@link ru.dokstrudio.med.srv.service.TestUnitAttemptLocalServiceUtil} to access the test unit attempt local service.
 	 */
+	public List<TestUnitAttempt> findByUserIdAndSubmitTime(long userId, Date submitTime) {
+		return TestUnitAttemptUtil.findByUserIdAndSubmitTime(userId, submitTime);
+	}
 }

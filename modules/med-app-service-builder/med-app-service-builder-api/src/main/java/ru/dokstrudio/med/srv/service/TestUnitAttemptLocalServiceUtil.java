@@ -136,6 +136,11 @@ public class TestUnitAttemptLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	public static java.util.List<ru.dokstrudio.med.srv.model.TestUnitAttempt> findByUserIdAndSubmitTime(
+		long userId, java.util.Date submitTime) {
+		return getService().findByUserIdAndSubmitTime(userId, submitTime);
+	}
+
 	/**
 	* Returns a range of all the test unit attempts.
 	*

@@ -89,7 +89,11 @@ public class UserAccountModelImpl extends BaseModelImpl<UserAccount>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(ru.dokstrudio.med.srv.service.util.ServiceProps.get(
 				"value.object.finder.cache.enabled.ru.dokstrudio.med.srv.model.UserAccount"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(ru.dokstrudio.med.srv.service.util.ServiceProps.get(
+				"value.object.column.bitmask.enabled.ru.dokstrudio.med.srv.model.UserAccount"),
+			true);
+	public static final long USERID_COLUMN_BITMASK = 1L;
+	public static final long ACCOUNTTYPEID_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(ru.dokstrudio.med.srv.service.util.ServiceProps.get(
 				"lock.expiration.time.ru.dokstrudio.med.srv.model.UserAccount"));
 
@@ -176,6 +180,14 @@ public class UserAccountModelImpl extends BaseModelImpl<UserAccount>
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -193,6 +205,10 @@ public class UserAccountModelImpl extends BaseModelImpl<UserAccount>
 
 	@Override
 	public void setUserUuid(String userUuid) {
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@Override
@@ -223,6 +239,10 @@ public class UserAccountModelImpl extends BaseModelImpl<UserAccount>
 	@Override
 	public void setExpirationDate(Date expirationDate) {
 		_expirationDate = expirationDate;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -295,6 +315,13 @@ public class UserAccountModelImpl extends BaseModelImpl<UserAccount>
 
 	@Override
 	public void resetOriginalValues() {
+		UserAccountModelImpl userAccountModelImpl = this;
+
+		userAccountModelImpl._originalUserId = userAccountModelImpl._userId;
+
+		userAccountModelImpl._setOriginalUserId = false;
+
+		userAccountModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -380,8 +407,11 @@ public class UserAccountModelImpl extends BaseModelImpl<UserAccount>
 			UserAccount.class
 		};
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private long _accountTypeId;
 	private Date _activationDate;
 	private Date _expirationDate;
+	private long _columnBitmask;
 	private UserAccount _escapedModel;
 }

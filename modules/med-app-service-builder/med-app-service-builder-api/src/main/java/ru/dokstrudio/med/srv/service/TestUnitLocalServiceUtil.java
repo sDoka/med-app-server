@@ -136,6 +136,18 @@ public class TestUnitLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	public static java.util.List<ru.dokstrudio.med.srv.model.TestUnit> findTestUnitByIsActualAndModifiedDateAndSpecializationId(
+		boolean isActual, java.util.Date modifiedDate, long specializationId) {
+		return getService()
+				   .findTestUnitByIsActualAndModifiedDateAndSpecializationId(isActual,
+			modifiedDate, specializationId);
+	}
+
+	public static java.util.List<ru.dokstrudio.med.srv.model.TestUnit> findTestUnitBySpecializationId(
+		long specializationId) {
+		return getService().findTestUnitBySpecializationId(specializationId);
+	}
+
 	/**
 	* Returns a range of all the test units.
 	*

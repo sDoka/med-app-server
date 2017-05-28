@@ -104,9 +104,11 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(ru.dokstrudio.med.srv.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.ru.dokstrudio.med.srv.model.TestUnit"),
 			true);
-	public static final long NUMBER_COLUMN_BITMASK = 1L;
-	public static final long SPECIALIZATIONID_COLUMN_BITMASK = 2L;
-	public static final long TESTUNITID_COLUMN_BITMASK = 4L;
+	public static final long ISACTUAL_COLUMN_BITMASK = 1L;
+	public static final long MODIFIEDDATE_COLUMN_BITMASK = 2L;
+	public static final long NUMBER_COLUMN_BITMASK = 4L;
+	public static final long SPECIALIZATIONID_COLUMN_BITMASK = 8L;
+	public static final long TESTUNITID_COLUMN_BITMASK = 16L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(ru.dokstrudio.med.srv.service.util.ServiceProps.get(
 				"lock.expiration.time.ru.dokstrudio.med.srv.model.TestUnit"));
 
@@ -344,7 +346,19 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 
 	@Override
 	public void setIsActual(boolean isActual) {
+		_columnBitmask |= ISACTUAL_COLUMN_BITMASK;
+
+		if (!_setOriginalIsActual) {
+			_setOriginalIsActual = true;
+
+			_originalIsActual = _isActual;
+		}
+
 		_isActual = isActual;
+	}
+
+	public boolean getOriginalIsActual() {
+		return _originalIsActual;
 	}
 
 	@Override
@@ -370,7 +384,17 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 	public void setModifiedDate(Date modifiedDate) {
 		_setModifiedDate = true;
 
+		_columnBitmask |= MODIFIEDDATE_COLUMN_BITMASK;
+
+		if (_originalModifiedDate == null) {
+			_originalModifiedDate = _modifiedDate;
+		}
+
 		_modifiedDate = modifiedDate;
+	}
+
+	public Date getOriginalModifiedDate() {
+		return _originalModifiedDate;
 	}
 
 	public long getColumnBitmask() {
@@ -483,6 +507,12 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 		testUnitModelImpl._originalSpecializationId = testUnitModelImpl._specializationId;
 
 		testUnitModelImpl._setOriginalSpecializationId = false;
+
+		testUnitModelImpl._originalIsActual = testUnitModelImpl._isActual;
+
+		testUnitModelImpl._setOriginalIsActual = false;
+
+		testUnitModelImpl._originalModifiedDate = testUnitModelImpl._modifiedDate;
 
 		testUnitModelImpl._setModifiedDate = false;
 
@@ -641,8 +671,11 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 	private int _questionType;
 	private long _questionDlFileEntryId;
 	private boolean _isActual;
+	private boolean _originalIsActual;
+	private boolean _setOriginalIsActual;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private Date _originalModifiedDate;
 	private boolean _setModifiedDate;
 	private long _columnBitmask;
 	private TestUnit _escapedModel;

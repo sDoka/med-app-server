@@ -29,6 +29,11 @@
             <finder-column name="number"></finder-column>
             <finder-column name="specializationId"></finder-column>
         </finder>
+        <finder name="IsActualAndModifiedDateAndSpecializationId" return-type="Collection">
+            <finder-column name="isActual"></finder-column>
+            <finder-column name="modifiedDate" comparator="&gt;="></finder-column>
+            <finder-column name="specializationId"></finder-column>
+        </finder>
 	</entity>
 
 	<entity name="TestUnitAnswer" local-service="true"
@@ -56,6 +61,10 @@
 		<finder return-type="Collection" name="TestUnitId">
 			<finder-column name="testUnitAnswerId"></finder-column>
 		</finder>
+        <finder name="UserIdAndSubmitTime" return-type="Collection">
+            <finder-column name="userId"></finder-column>
+            <finder-column name="submitTime" comparator="&gt;="></finder-column>
+        </finder>
 
 	</entity>
 
@@ -73,6 +82,9 @@
 		<column name="accountTypeId" type="long" primary="true"></column>
 		<column name="activationDate" type="Date"></column>
 		<column name="expirationDate" type="Date"></column>
+        <finder name="UserId" return-type="Collection">
+            <finder-column name="userId"></finder-column>
+        </finder>
 	</entity>
 	
 	<entity name="ApplicationAccount" local-service="true" remote-service="false"

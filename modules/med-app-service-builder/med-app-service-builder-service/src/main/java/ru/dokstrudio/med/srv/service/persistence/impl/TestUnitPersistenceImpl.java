@@ -43,6 +43,8 @@ import ru.dokstrudio.med.srv.service.persistence.TestUnitPersistence;
 
 import java.io.Serializable;
 
+import java.sql.Timestamp;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -1346,6 +1348,632 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	private static final String _FINDER_COLUMN_TESTUNITNUMBERANDSPECIALIZATIONID_NUMBER_2 =
 		"testUnit.number = ? AND ";
 	private static final String _FINDER_COLUMN_TESTUNITNUMBERANDSPECIALIZATIONID_SPECIALIZATIONID_2 =
+		"testUnit.specializationId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID =
+		new FinderPath(TestUnitModelImpl.ENTITY_CACHE_ENABLED,
+			TestUnitModelImpl.FINDER_CACHE_ENABLED, TestUnitImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByIsActualAndModifiedDateAndSpecializationId",
+			new String[] {
+				Boolean.class.getName(), Date.class.getName(),
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID =
+		new FinderPath(TestUnitModelImpl.ENTITY_CACHE_ENABLED,
+			TestUnitModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"countByIsActualAndModifiedDateAndSpecializationId",
+			new String[] {
+				Boolean.class.getName(), Date.class.getName(),
+				Long.class.getName()
+			});
+
+	/**
+	 * Returns all the test units where isActual = &#63; and modifiedDate &ge; &#63; and specializationId = &#63;.
+	 *
+	 * @param isActual the is actual
+	 * @param modifiedDate the modified date
+	 * @param specializationId the specialization ID
+	 * @return the matching test units
+	 */
+	@Override
+	public List<TestUnit> findByIsActualAndModifiedDateAndSpecializationId(
+		boolean isActual, Date modifiedDate, long specializationId) {
+		return findByIsActualAndModifiedDateAndSpecializationId(isActual,
+			modifiedDate, specializationId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the test units where isActual = &#63; and modifiedDate &ge; &#63; and specializationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link TestUnitModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param isActual the is actual
+	 * @param modifiedDate the modified date
+	 * @param specializationId the specialization ID
+	 * @param start the lower bound of the range of test units
+	 * @param end the upper bound of the range of test units (not inclusive)
+	 * @return the range of matching test units
+	 */
+	@Override
+	public List<TestUnit> findByIsActualAndModifiedDateAndSpecializationId(
+		boolean isActual, Date modifiedDate, long specializationId, int start,
+		int end) {
+		return findByIsActualAndModifiedDateAndSpecializationId(isActual,
+			modifiedDate, specializationId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the test units where isActual = &#63; and modifiedDate &ge; &#63; and specializationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link TestUnitModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param isActual the is actual
+	 * @param modifiedDate the modified date
+	 * @param specializationId the specialization ID
+	 * @param start the lower bound of the range of test units
+	 * @param end the upper bound of the range of test units (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching test units
+	 */
+	@Override
+	public List<TestUnit> findByIsActualAndModifiedDateAndSpecializationId(
+		boolean isActual, Date modifiedDate, long specializationId, int start,
+		int end, OrderByComparator<TestUnit> orderByComparator) {
+		return findByIsActualAndModifiedDateAndSpecializationId(isActual,
+			modifiedDate, specializationId, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the test units where isActual = &#63; and modifiedDate &ge; &#63; and specializationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link TestUnitModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param isActual the is actual
+	 * @param modifiedDate the modified date
+	 * @param specializationId the specialization ID
+	 * @param start the lower bound of the range of test units
+	 * @param end the upper bound of the range of test units (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching test units
+	 */
+	@Override
+	public List<TestUnit> findByIsActualAndModifiedDateAndSpecializationId(
+		boolean isActual, Date modifiedDate, long specializationId, int start,
+		int end, OrderByComparator<TestUnit> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID;
+		finderArgs = new Object[] {
+				isActual, modifiedDate, specializationId,
+				
+				start, end, orderByComparator
+			};
+
+		List<TestUnit> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<TestUnit>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (TestUnit testUnit : list) {
+					if ((isActual != testUnit.getIsActual()) ||
+							(modifiedDate.getTime() > testUnit.getModifiedDate()
+																  .getTime()) ||
+							(specializationId != testUnit.getSpecializationId())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_TESTUNIT_WHERE);
+
+			query.append(_FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_ISACTUAL_2);
+
+			boolean bindModifiedDate = false;
+
+			if (modifiedDate == null) {
+				query.append(_FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_MODIFIEDDATE_1);
+			}
+			else {
+				bindModifiedDate = true;
+
+				query.append(_FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_MODIFIEDDATE_2);
+			}
+
+			query.append(_FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_SPECIALIZATIONID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(TestUnitModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(isActual);
+
+				if (bindModifiedDate) {
+					qPos.add(new Timestamp(modifiedDate.getTime()));
+				}
+
+				qPos.add(specializationId);
+
+				if (!pagination) {
+					list = (List<TestUnit>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<TestUnit>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first test unit in the ordered set where isActual = &#63; and modifiedDate &ge; &#63; and specializationId = &#63;.
+	 *
+	 * @param isActual the is actual
+	 * @param modifiedDate the modified date
+	 * @param specializationId the specialization ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching test unit
+	 * @throws NoSuchTestUnitException if a matching test unit could not be found
+	 */
+	@Override
+	public TestUnit findByIsActualAndModifiedDateAndSpecializationId_First(
+		boolean isActual, Date modifiedDate, long specializationId,
+		OrderByComparator<TestUnit> orderByComparator)
+		throws NoSuchTestUnitException {
+		TestUnit testUnit = fetchByIsActualAndModifiedDateAndSpecializationId_First(isActual,
+				modifiedDate, specializationId, orderByComparator);
+
+		if (testUnit != null) {
+			return testUnit;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("isActual=");
+		msg.append(isActual);
+
+		msg.append(", modifiedDate=");
+		msg.append(modifiedDate);
+
+		msg.append(", specializationId=");
+		msg.append(specializationId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchTestUnitException(msg.toString());
+	}
+
+	/**
+	 * Returns the first test unit in the ordered set where isActual = &#63; and modifiedDate &ge; &#63; and specializationId = &#63;.
+	 *
+	 * @param isActual the is actual
+	 * @param modifiedDate the modified date
+	 * @param specializationId the specialization ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching test unit, or <code>null</code> if a matching test unit could not be found
+	 */
+	@Override
+	public TestUnit fetchByIsActualAndModifiedDateAndSpecializationId_First(
+		boolean isActual, Date modifiedDate, long specializationId,
+		OrderByComparator<TestUnit> orderByComparator) {
+		List<TestUnit> list = findByIsActualAndModifiedDateAndSpecializationId(isActual,
+				modifiedDate, specializationId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last test unit in the ordered set where isActual = &#63; and modifiedDate &ge; &#63; and specializationId = &#63;.
+	 *
+	 * @param isActual the is actual
+	 * @param modifiedDate the modified date
+	 * @param specializationId the specialization ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching test unit
+	 * @throws NoSuchTestUnitException if a matching test unit could not be found
+	 */
+	@Override
+	public TestUnit findByIsActualAndModifiedDateAndSpecializationId_Last(
+		boolean isActual, Date modifiedDate, long specializationId,
+		OrderByComparator<TestUnit> orderByComparator)
+		throws NoSuchTestUnitException {
+		TestUnit testUnit = fetchByIsActualAndModifiedDateAndSpecializationId_Last(isActual,
+				modifiedDate, specializationId, orderByComparator);
+
+		if (testUnit != null) {
+			return testUnit;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("isActual=");
+		msg.append(isActual);
+
+		msg.append(", modifiedDate=");
+		msg.append(modifiedDate);
+
+		msg.append(", specializationId=");
+		msg.append(specializationId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchTestUnitException(msg.toString());
+	}
+
+	/**
+	 * Returns the last test unit in the ordered set where isActual = &#63; and modifiedDate &ge; &#63; and specializationId = &#63;.
+	 *
+	 * @param isActual the is actual
+	 * @param modifiedDate the modified date
+	 * @param specializationId the specialization ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching test unit, or <code>null</code> if a matching test unit could not be found
+	 */
+	@Override
+	public TestUnit fetchByIsActualAndModifiedDateAndSpecializationId_Last(
+		boolean isActual, Date modifiedDate, long specializationId,
+		OrderByComparator<TestUnit> orderByComparator) {
+		int count = countByIsActualAndModifiedDateAndSpecializationId(isActual,
+				modifiedDate, specializationId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<TestUnit> list = findByIsActualAndModifiedDateAndSpecializationId(isActual,
+				modifiedDate, specializationId, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the test units before and after the current test unit in the ordered set where isActual = &#63; and modifiedDate &ge; &#63; and specializationId = &#63;.
+	 *
+	 * @param testUnitId the primary key of the current test unit
+	 * @param isActual the is actual
+	 * @param modifiedDate the modified date
+	 * @param specializationId the specialization ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next test unit
+	 * @throws NoSuchTestUnitException if a test unit with the primary key could not be found
+	 */
+	@Override
+	public TestUnit[] findByIsActualAndModifiedDateAndSpecializationId_PrevAndNext(
+		long testUnitId, boolean isActual, Date modifiedDate,
+		long specializationId, OrderByComparator<TestUnit> orderByComparator)
+		throws NoSuchTestUnitException {
+		TestUnit testUnit = findByPrimaryKey(testUnitId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			TestUnit[] array = new TestUnitImpl[3];
+
+			array[0] = getByIsActualAndModifiedDateAndSpecializationId_PrevAndNext(session,
+					testUnit, isActual, modifiedDate, specializationId,
+					orderByComparator, true);
+
+			array[1] = testUnit;
+
+			array[2] = getByIsActualAndModifiedDateAndSpecializationId_PrevAndNext(session,
+					testUnit, isActual, modifiedDate, specializationId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected TestUnit getByIsActualAndModifiedDateAndSpecializationId_PrevAndNext(
+		Session session, TestUnit testUnit, boolean isActual,
+		Date modifiedDate, long specializationId,
+		OrderByComparator<TestUnit> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		query.append(_SQL_SELECT_TESTUNIT_WHERE);
+
+		query.append(_FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_ISACTUAL_2);
+
+		boolean bindModifiedDate = false;
+
+		if (modifiedDate == null) {
+			query.append(_FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_MODIFIEDDATE_1);
+		}
+		else {
+			bindModifiedDate = true;
+
+			query.append(_FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_MODIFIEDDATE_2);
+		}
+
+		query.append(_FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_SPECIALIZATIONID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(TestUnitModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(isActual);
+
+		if (bindModifiedDate) {
+			qPos.add(new Timestamp(modifiedDate.getTime()));
+		}
+
+		qPos.add(specializationId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(testUnit);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<TestUnit> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the test units where isActual = &#63; and modifiedDate &ge; &#63; and specializationId = &#63; from the database.
+	 *
+	 * @param isActual the is actual
+	 * @param modifiedDate the modified date
+	 * @param specializationId the specialization ID
+	 */
+	@Override
+	public void removeByIsActualAndModifiedDateAndSpecializationId(
+		boolean isActual, Date modifiedDate, long specializationId) {
+		for (TestUnit testUnit : findByIsActualAndModifiedDateAndSpecializationId(
+				isActual, modifiedDate, specializationId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(testUnit);
+		}
+	}
+
+	/**
+	 * Returns the number of test units where isActual = &#63; and modifiedDate &ge; &#63; and specializationId = &#63;.
+	 *
+	 * @param isActual the is actual
+	 * @param modifiedDate the modified date
+	 * @param specializationId the specialization ID
+	 * @return the number of matching test units
+	 */
+	@Override
+	public int countByIsActualAndModifiedDateAndSpecializationId(
+		boolean isActual, Date modifiedDate, long specializationId) {
+		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID;
+
+		Object[] finderArgs = new Object[] {
+				isActual, modifiedDate, specializationId
+			};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_TESTUNIT_WHERE);
+
+			query.append(_FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_ISACTUAL_2);
+
+			boolean bindModifiedDate = false;
+
+			if (modifiedDate == null) {
+				query.append(_FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_MODIFIEDDATE_1);
+			}
+			else {
+				bindModifiedDate = true;
+
+				query.append(_FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_MODIFIEDDATE_2);
+			}
+
+			query.append(_FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_SPECIALIZATIONID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(isActual);
+
+				if (bindModifiedDate) {
+					qPos.add(new Timestamp(modifiedDate.getTime()));
+				}
+
+				qPos.add(specializationId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_ISACTUAL_2 =
+		"testUnit.isActual = ? AND ";
+	private static final String _FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_MODIFIEDDATE_1 =
+		"testUnit.modifiedDate IS NULL AND ";
+	private static final String _FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_MODIFIEDDATE_2 =
+		"testUnit.modifiedDate >= ? AND ";
+	private static final String _FINDER_COLUMN_ISACTUALANDMODIFIEDDATEANDSPECIALIZATIONID_SPECIALIZATIONID_2 =
 		"testUnit.specializationId = ?";
 
 	public TestUnitPersistenceImpl() {

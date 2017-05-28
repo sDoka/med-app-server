@@ -138,6 +138,12 @@ public class UserAccountLocalServiceWrapper implements UserAccountLocalService,
 			orderByComparator);
 	}
 
+	@Override
+	public java.util.List<ru.dokstrudio.med.srv.model.UserAccount> findByUserId(
+		long userId) {
+		return _userAccountLocalService.findByUserId(userId);
+	}
+
 	/**
 	* Returns a range of all the user accounts.
 	*

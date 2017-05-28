@@ -136,6 +136,11 @@ public class UserAccountLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	public static java.util.List<ru.dokstrudio.med.srv.model.UserAccount> findByUserId(
+		long userId) {
+		return getService().findByUserId(userId);
+	}
+
 	/**
 	* Returns a range of all the user accounts.
 	*

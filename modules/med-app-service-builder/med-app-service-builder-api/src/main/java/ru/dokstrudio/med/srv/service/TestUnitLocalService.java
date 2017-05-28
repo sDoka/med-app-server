@@ -37,6 +37,7 @@ import ru.dokstrudio.med.srv.model.TestUnit;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -134,6 +135,11 @@ public interface TestUnitLocalService extends BaseLocalService,
 	*/
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
+
+	public List<TestUnit> findTestUnitByIsActualAndModifiedDateAndSpecializationId(
+		boolean isActual, Date modifiedDate, long specializationId);
+
+	public List<TestUnit> findTestUnitBySpecializationId(long specializationId);
 
 	/**
 	* Returns a range of all the test units.

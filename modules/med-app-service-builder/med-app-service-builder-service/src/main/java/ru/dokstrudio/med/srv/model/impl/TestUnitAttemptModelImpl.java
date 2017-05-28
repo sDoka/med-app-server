@@ -97,8 +97,10 @@ public class TestUnitAttemptModelImpl extends BaseModelImpl<TestUnitAttempt>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(ru.dokstrudio.med.srv.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.ru.dokstrudio.med.srv.model.TestUnitAttempt"),
 			true);
-	public static final long TESTUNITANSWERID_COLUMN_BITMASK = 1L;
-	public static final long TESTUNITATTEMPTID_COLUMN_BITMASK = 2L;
+	public static final long SUBMITTIME_COLUMN_BITMASK = 1L;
+	public static final long TESTUNITANSWERID_COLUMN_BITMASK = 2L;
+	public static final long USERID_COLUMN_BITMASK = 4L;
+	public static final long TESTUNITATTEMPTID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(ru.dokstrudio.med.srv.service.util.ServiceProps.get(
 				"lock.expiration.time.ru.dokstrudio.med.srv.model.TestUnitAttempt"));
 
@@ -201,6 +203,14 @@ public class TestUnitAttemptModelImpl extends BaseModelImpl<TestUnitAttempt>
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -218,6 +228,10 @@ public class TestUnitAttemptModelImpl extends BaseModelImpl<TestUnitAttempt>
 
 	@Override
 	public void setUserUuid(String userUuid) {
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@Override
@@ -259,7 +273,17 @@ public class TestUnitAttemptModelImpl extends BaseModelImpl<TestUnitAttempt>
 
 	@Override
 	public void setSubmitTime(Date submitTime) {
+		_columnBitmask |= SUBMITTIME_COLUMN_BITMASK;
+
+		if (_originalSubmitTime == null) {
+			_originalSubmitTime = _submitTime;
+		}
+
 		_submitTime = submitTime;
+	}
+
+	public Date getOriginalSubmitTime() {
+		return _originalSubmitTime;
 	}
 
 	public long getColumnBitmask() {
@@ -360,9 +384,15 @@ public class TestUnitAttemptModelImpl extends BaseModelImpl<TestUnitAttempt>
 	public void resetOriginalValues() {
 		TestUnitAttemptModelImpl testUnitAttemptModelImpl = this;
 
+		testUnitAttemptModelImpl._originalUserId = testUnitAttemptModelImpl._userId;
+
+		testUnitAttemptModelImpl._setOriginalUserId = false;
+
 		testUnitAttemptModelImpl._originalTestUnitAnswerId = testUnitAttemptModelImpl._testUnitAnswerId;
 
 		testUnitAttemptModelImpl._setOriginalTestUnitAnswerId = false;
+
+		testUnitAttemptModelImpl._originalSubmitTime = testUnitAttemptModelImpl._submitTime;
 
 		testUnitAttemptModelImpl._columnBitmask = 0;
 	}
@@ -450,11 +480,14 @@ public class TestUnitAttemptModelImpl extends BaseModelImpl<TestUnitAttempt>
 		};
 	private long _testUnitAttemptId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private long _testUnitId;
 	private long _testUnitAnswerId;
 	private long _originalTestUnitAnswerId;
 	private boolean _setOriginalTestUnitAnswerId;
 	private Date _submitTime;
+	private Date _originalSubmitTime;
 	private long _columnBitmask;
 	private TestUnitAttempt _escapedModel;
 }
