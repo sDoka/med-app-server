@@ -139,7 +139,7 @@ public class UserManagmentRest extends Application {
 			ApplicationUser applicationUser = new ApplicationUser(user);
 			response = RestResponseUtil.createSuccessResponse(applicationUser.toString());
 		} catch (Exception e) {
-			response = RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+			response = RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, "\"" + e.getMessage() + "\"");
 			log.error("Error occured : " + e.getMessage());
 		}
 
@@ -162,14 +162,14 @@ public class UserManagmentRest extends Application {
 			log.info("### User found..");
 			if (authResult == 0) {
 				log.error("### User's password is incorrect...");
-				return RestResponseUtil.createErrorResponse(ResponseCodes.FORBIDDEN, "Wrong password");
+				return RestResponseUtil.createErrorResponse(ResponseCodes.FORBIDDEN, "\"Wrong password\"");
 			}
 			if (deviceKey != null) {
 				// TODO get device and check, if bound
 				// if not - ?
 			} else {
 				log.error("Device key was not set. Aborting...");
-				return RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, "Device key is not set");
+				return RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, "\"Device key is not set\"");
 			}
 			ApplicationUser applicationUser = new ApplicationUser(user);
 			response = RestResponseUtil.createSuccessResponse(applicationUser.toString());
@@ -177,7 +177,7 @@ public class UserManagmentRest extends Application {
 		} catch (PortalException e) {
 			log.error(e.getMessage());
 			// TODO return error response
-			return RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+			return RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, "\"" + e.getMessage() + "\"");
 		}
 	}
 
@@ -192,10 +192,10 @@ public class UserManagmentRest extends Application {
 		if (deviceKey != null) {
 			// TODO get device and check, if bound
 			// if not - ?
-			return RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, "This method is not implemented yet");
+			return RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, "\"This method is not implemented yet\"");
 		} else {
 			log.error("Device key was not set. Aborting...");
-			return RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, "Device key is not set");
+			return RestResponseUtil.createErrorResponse(ResponseCodes.INTERNAL_SERVER_ERROR, "\"Device key is not set\"");
 		}
 	}
 }
