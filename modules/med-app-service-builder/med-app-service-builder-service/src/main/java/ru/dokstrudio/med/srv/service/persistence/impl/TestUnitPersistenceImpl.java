@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import ru.dokstrudio.med.srv.exception.NoSuchTestUnitException;
@@ -593,7 +594,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 			TestUnitModelImpl.FINDER_CACHE_ENABLED, TestUnitImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBySpecializationId",
 			new String[] {
-				Integer.class.getName(),
+				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
@@ -602,12 +603,12 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 		new FinderPath(TestUnitModelImpl.ENTITY_CACHE_ENABLED,
 			TestUnitModelImpl.FINDER_CACHE_ENABLED, TestUnitImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findBySpecializationId", new String[] { Integer.class.getName() },
+			"findBySpecializationId", new String[] { Long.class.getName() },
 			TestUnitModelImpl.SPECIALIZATIONID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_SPECIALIZATIONID = new FinderPath(TestUnitModelImpl.ENTITY_CACHE_ENABLED,
 			TestUnitModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countBySpecializationId", new String[] { Integer.class.getName() });
+			"countBySpecializationId", new String[] { Long.class.getName() });
 
 	/**
 	 * Returns all the test units where specializationId = &#63;.
@@ -616,7 +617,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	 * @return the matching test units
 	 */
 	@Override
-	public List<TestUnit> findBySpecializationId(int specializationId) {
+	public List<TestUnit> findBySpecializationId(long specializationId) {
 		return findBySpecializationId(specializationId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
@@ -634,7 +635,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	 * @return the range of matching test units
 	 */
 	@Override
-	public List<TestUnit> findBySpecializationId(int specializationId,
+	public List<TestUnit> findBySpecializationId(long specializationId,
 		int start, int end) {
 		return findBySpecializationId(specializationId, start, end, null);
 	}
@@ -653,7 +654,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	 * @return the ordered range of matching test units
 	 */
 	@Override
-	public List<TestUnit> findBySpecializationId(int specializationId,
+	public List<TestUnit> findBySpecializationId(long specializationId,
 		int start, int end, OrderByComparator<TestUnit> orderByComparator) {
 		return findBySpecializationId(specializationId, start, end,
 			orderByComparator, true);
@@ -674,7 +675,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	 * @return the ordered range of matching test units
 	 */
 	@Override
-	public List<TestUnit> findBySpecializationId(int specializationId,
+	public List<TestUnit> findBySpecializationId(long specializationId,
 		int start, int end, OrderByComparator<TestUnit> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -789,7 +790,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	 * @throws NoSuchTestUnitException if a matching test unit could not be found
 	 */
 	@Override
-	public TestUnit findBySpecializationId_First(int specializationId,
+	public TestUnit findBySpecializationId_First(long specializationId,
 		OrderByComparator<TestUnit> orderByComparator)
 		throws NoSuchTestUnitException {
 		TestUnit testUnit = fetchBySpecializationId_First(specializationId,
@@ -819,7 +820,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	 * @return the first matching test unit, or <code>null</code> if a matching test unit could not be found
 	 */
 	@Override
-	public TestUnit fetchBySpecializationId_First(int specializationId,
+	public TestUnit fetchBySpecializationId_First(long specializationId,
 		OrderByComparator<TestUnit> orderByComparator) {
 		List<TestUnit> list = findBySpecializationId(specializationId, 0, 1,
 				orderByComparator);
@@ -840,7 +841,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	 * @throws NoSuchTestUnitException if a matching test unit could not be found
 	 */
 	@Override
-	public TestUnit findBySpecializationId_Last(int specializationId,
+	public TestUnit findBySpecializationId_Last(long specializationId,
 		OrderByComparator<TestUnit> orderByComparator)
 		throws NoSuchTestUnitException {
 		TestUnit testUnit = fetchBySpecializationId_Last(specializationId,
@@ -870,7 +871,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	 * @return the last matching test unit, or <code>null</code> if a matching test unit could not be found
 	 */
 	@Override
-	public TestUnit fetchBySpecializationId_Last(int specializationId,
+	public TestUnit fetchBySpecializationId_Last(long specializationId,
 		OrderByComparator<TestUnit> orderByComparator) {
 		int count = countBySpecializationId(specializationId);
 
@@ -899,7 +900,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	 */
 	@Override
 	public TestUnit[] findBySpecializationId_PrevAndNext(long testUnitId,
-		int specializationId, OrderByComparator<TestUnit> orderByComparator)
+		long specializationId, OrderByComparator<TestUnit> orderByComparator)
 		throws NoSuchTestUnitException {
 		TestUnit testUnit = findByPrimaryKey(testUnitId);
 
@@ -929,7 +930,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	}
 
 	protected TestUnit getBySpecializationId_PrevAndNext(Session session,
-		TestUnit testUnit, int specializationId,
+		TestUnit testUnit, long specializationId,
 		OrderByComparator<TestUnit> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -1040,7 +1041,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	 * @param specializationId the specialization ID
 	 */
 	@Override
-	public void removeBySpecializationId(int specializationId) {
+	public void removeBySpecializationId(long specializationId) {
 		for (TestUnit testUnit : findBySpecializationId(specializationId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(testUnit);
@@ -1054,7 +1055,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	 * @return the number of matching test units
 	 */
 	@Override
-	public int countBySpecializationId(int specializationId) {
+	public int countBySpecializationId(long specializationId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_SPECIALIZATIONID;
 
 		Object[] finderArgs = new Object[] { specializationId };
@@ -1100,6 +1101,252 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 
 	private static final String _FINDER_COLUMN_SPECIALIZATIONID_SPECIALIZATIONID_2 =
 		"testUnit.specializationId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_TESTUNITNUMBERANDSPECIALIZATIONID =
+		new FinderPath(TestUnitModelImpl.ENTITY_CACHE_ENABLED,
+			TestUnitModelImpl.FINDER_CACHE_ENABLED, TestUnitImpl.class,
+			FINDER_CLASS_NAME_ENTITY,
+			"fetchByTestUnitNumberAndSpecializationId",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			TestUnitModelImpl.NUMBER_COLUMN_BITMASK |
+			TestUnitModelImpl.SPECIALIZATIONID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_TESTUNITNUMBERANDSPECIALIZATIONID =
+		new FinderPath(TestUnitModelImpl.ENTITY_CACHE_ENABLED,
+			TestUnitModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByTestUnitNumberAndSpecializationId",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns the test unit where number = &#63; and specializationId = &#63; or throws a {@link NoSuchTestUnitException} if it could not be found.
+	 *
+	 * @param number the number
+	 * @param specializationId the specialization ID
+	 * @return the matching test unit
+	 * @throws NoSuchTestUnitException if a matching test unit could not be found
+	 */
+	@Override
+	public TestUnit findByTestUnitNumberAndSpecializationId(long number,
+		long specializationId) throws NoSuchTestUnitException {
+		TestUnit testUnit = fetchByTestUnitNumberAndSpecializationId(number,
+				specializationId);
+
+		if (testUnit == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("number=");
+			msg.append(number);
+
+			msg.append(", specializationId=");
+			msg.append(specializationId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchTestUnitException(msg.toString());
+		}
+
+		return testUnit;
+	}
+
+	/**
+	 * Returns the test unit where number = &#63; and specializationId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param number the number
+	 * @param specializationId the specialization ID
+	 * @return the matching test unit, or <code>null</code> if a matching test unit could not be found
+	 */
+	@Override
+	public TestUnit fetchByTestUnitNumberAndSpecializationId(long number,
+		long specializationId) {
+		return fetchByTestUnitNumberAndSpecializationId(number,
+			specializationId, true);
+	}
+
+	/**
+	 * Returns the test unit where number = &#63; and specializationId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param number the number
+	 * @param specializationId the specialization ID
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching test unit, or <code>null</code> if a matching test unit could not be found
+	 */
+	@Override
+	public TestUnit fetchByTestUnitNumberAndSpecializationId(long number,
+		long specializationId, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { number, specializationId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_TESTUNITNUMBERANDSPECIALIZATIONID,
+					finderArgs, this);
+		}
+
+		if (result instanceof TestUnit) {
+			TestUnit testUnit = (TestUnit)result;
+
+			if ((number != testUnit.getNumber()) ||
+					(specializationId != testUnit.getSpecializationId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_TESTUNIT_WHERE);
+
+			query.append(_FINDER_COLUMN_TESTUNITNUMBERANDSPECIALIZATIONID_NUMBER_2);
+
+			query.append(_FINDER_COLUMN_TESTUNITNUMBERANDSPECIALIZATIONID_SPECIALIZATIONID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(number);
+
+				qPos.add(specializationId);
+
+				List<TestUnit> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_TESTUNITNUMBERANDSPECIALIZATIONID,
+						finderArgs, list);
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"TestUnitPersistenceImpl.fetchByTestUnitNumberAndSpecializationId(long, long, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					TestUnit testUnit = list.get(0);
+
+					result = testUnit;
+
+					cacheResult(testUnit);
+
+					if ((testUnit.getNumber() != number) ||
+							(testUnit.getSpecializationId() != specializationId)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_TESTUNITNUMBERANDSPECIALIZATIONID,
+							finderArgs, testUnit);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_TESTUNITNUMBERANDSPECIALIZATIONID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (TestUnit)result;
+		}
+	}
+
+	/**
+	 * Removes the test unit where number = &#63; and specializationId = &#63; from the database.
+	 *
+	 * @param number the number
+	 * @param specializationId the specialization ID
+	 * @return the test unit that was removed
+	 */
+	@Override
+	public TestUnit removeByTestUnitNumberAndSpecializationId(long number,
+		long specializationId) throws NoSuchTestUnitException {
+		TestUnit testUnit = findByTestUnitNumberAndSpecializationId(number,
+				specializationId);
+
+		return remove(testUnit);
+	}
+
+	/**
+	 * Returns the number of test units where number = &#63; and specializationId = &#63;.
+	 *
+	 * @param number the number
+	 * @param specializationId the specialization ID
+	 * @return the number of matching test units
+	 */
+	@Override
+	public int countByTestUnitNumberAndSpecializationId(long number,
+		long specializationId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_TESTUNITNUMBERANDSPECIALIZATIONID;
+
+		Object[] finderArgs = new Object[] { number, specializationId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_TESTUNIT_WHERE);
+
+			query.append(_FINDER_COLUMN_TESTUNITNUMBERANDSPECIALIZATIONID_NUMBER_2);
+
+			query.append(_FINDER_COLUMN_TESTUNITNUMBERANDSPECIALIZATIONID_SPECIALIZATIONID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(number);
+
+				qPos.add(specializationId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_TESTUNITNUMBERANDSPECIALIZATIONID_NUMBER_2 =
+		"testUnit.number = ? AND ";
+	private static final String _FINDER_COLUMN_TESTUNITNUMBERANDSPECIALIZATIONID_SPECIALIZATIONID_2 =
+		"testUnit.specializationId = ?";
 
 	public TestUnitPersistenceImpl() {
 		setModelClass(TestUnit.class);
@@ -1114,6 +1361,10 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	public void cacheResult(TestUnit testUnit) {
 		entityCache.putResult(TestUnitModelImpl.ENTITY_CACHE_ENABLED,
 			TestUnitImpl.class, testUnit.getPrimaryKey(), testUnit);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_TESTUNITNUMBERANDSPECIALIZATIONID,
+			new Object[] { testUnit.getNumber(), testUnit.getSpecializationId() },
+			testUnit);
 
 		testUnit.resetOriginalValues();
 	}
@@ -1166,6 +1417,8 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((TestUnitModelImpl)testUnit, true);
 	}
 
 	@Override
@@ -1176,6 +1429,48 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 		for (TestUnit testUnit : testUnits) {
 			entityCache.removeResult(TestUnitModelImpl.ENTITY_CACHE_ENABLED,
 				TestUnitImpl.class, testUnit.getPrimaryKey());
+
+			clearUniqueFindersCache((TestUnitModelImpl)testUnit, true);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(TestUnitModelImpl testUnitModelImpl) {
+		Object[] args = new Object[] {
+				testUnitModelImpl.getNumber(),
+				testUnitModelImpl.getSpecializationId()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_TESTUNITNUMBERANDSPECIALIZATIONID,
+			args, Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_TESTUNITNUMBERANDSPECIALIZATIONID,
+			args, testUnitModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		TestUnitModelImpl testUnitModelImpl, boolean clearCurrent) {
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					testUnitModelImpl.getNumber(),
+					testUnitModelImpl.getSpecializationId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_TESTUNITNUMBERANDSPECIALIZATIONID,
+				args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_TESTUNITNUMBERANDSPECIALIZATIONID,
+				args);
+		}
+
+		if ((testUnitModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_TESTUNITNUMBERANDSPECIALIZATIONID.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					testUnitModelImpl.getOriginalNumber(),
+					testUnitModelImpl.getOriginalSpecializationId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_TESTUNITNUMBERANDSPECIALIZATIONID,
+				args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_TESTUNITNUMBERANDSPECIALIZATIONID,
+				args);
 		}
 	}
 
@@ -1379,6 +1674,9 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 		entityCache.putResult(TestUnitModelImpl.ENTITY_CACHE_ENABLED,
 			TestUnitImpl.class, testUnit.getPrimaryKey(), testUnit, false);
 
+		clearUniqueFindersCache(testUnitModelImpl, false);
+		cacheUniqueFindersCache(testUnitModelImpl);
+
 		testUnit.resetOriginalValues();
 
 		return testUnit;
@@ -1396,6 +1694,7 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 
 		testUnitImpl.setTestUnitId(testUnit.getTestUnitId());
 		testUnitImpl.setNumber(testUnit.getNumber());
+		testUnitImpl.setCode(testUnit.getCode());
 		testUnitImpl.setSpecializationId(testUnit.getSpecializationId());
 		testUnitImpl.setQuestionText(testUnit.getQuestionText());
 		testUnitImpl.setQuestionType(testUnit.getQuestionType());
@@ -1823,6 +2122,6 @@ public class TestUnitPersistenceImpl extends BasePersistenceImpl<TestUnit>
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No TestUnit exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(TestUnitPersistenceImpl.class);
 	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"number"
+				"number", "code"
 			});
 }

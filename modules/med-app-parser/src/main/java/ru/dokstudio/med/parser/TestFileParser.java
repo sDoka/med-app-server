@@ -1,5 +1,8 @@
 package ru.dokstudio.med.parser;
 
+import ru.dokstrudio.med.srv.exception.NoSuchTestUnitException;
+import ru.dokstrudio.med.srv.model.TestUnit;
+import ru.dokstrudio.med.srv.model.TestUnitAnswer;
 import ru.dokstrudio.med.srv.service.TestUnitAnswerLocalService;
 import ru.dokstrudio.med.srv.service.TestUnitLocalService;
 import ru.dokstudio.med.parser.api.TestFileParserApi;
@@ -12,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,6 +23,7 @@ import java.util.regex.Pattern;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -42,9 +47,12 @@ public class TestFileParser implements TestFileParserApi {
 	@Reference
 	TestUnitAnswerLocalService testUnitAnswerLocalService;
 	
+	@Reference
+	CounterLocalService counterLocalService;
+	
 	@Override
 	public void uploadNewSpecializationTest(long specializationId, File testFile) {
-		log.info("Tip: in input file test units must be separate from each other with empty strings.");
+		log.info("Tip: in input file test units must be separate from each other with empty string.");
 		log.info("If there are empty strings inside test unit, the parser will stop at this unit");
 		log.info("You should correct test unit in the input file and start parser again for proper result");
 		
@@ -70,7 +78,62 @@ public class TestFileParser implements TestFileParserApi {
 		}
 		
 		for (ParserTestModel parserTestModel : testUnitList) {
+			long number = 0;
+			try {
+				number = Long.parseLong(parserTestModel.getTestNumber());
+				TestUnit testUnit = testUnitLocalService.findTestUnitByNumberAndSpecializationId(number, specializationId);
+				log.info("Found test unit with specializationId = " 
+						+ specializationId + " and number = " 
+						+ number +". Setting current as not actual and creating new one...");
+				testUnit.setIsActual(false);
+				Date now = new Date();
+				testUnit.setModifiedDate(now);
+				testUnitLocalService.updateTestUnit(testUnit);
+				TestUnit newTestUnit = createTestUnit(number, specializationId, parserTestModel);
+				createTestUnitAnswers(newTestUnit.getPrimaryKey(), parserTestModel);
+			} catch (NumberFormatException e) {
+				log.warn("Can not parse test unit number as long. Skipping...");
+				continue;
+			} catch (NoSuchTestUnitException e) {
+				log.info("Test unit with specializationId = " 
+						+ specializationId + " and number = " 
+						+ number + " not found. Creating...");
+				TestUnit newTestUnit = createTestUnit(number, specializationId, parserTestModel);
+				createTestUnitAnswers(newTestUnit.getPrimaryKey(), parserTestModel);
+			}
+		}
+	}
+	
+	private TestUnit createTestUnit(long number, long specializationId, ParserTestModel parserTestModel) {
+		TestUnit newTestUnit = testUnitLocalService.createTestUnit(counterLocalService.increment(TestUnit.class.getName()));
+		newTestUnit.setNumber(number);
+		newTestUnit.setCode(parserTestModel.getTestCode());
+		newTestUnit.setQuestionText(parserTestModel.getTestQuestion());
+		newTestUnit.setSpecializationId(specializationId);
+		newTestUnit.setQuestionType(1);
+		newTestUnit.setIsActual(true);
+		Date now = new Date();
+		newTestUnit.setCreateDate(now);
+		newTestUnit.setModifiedDate(now);
+		testUnitLocalService.addTestUnit(newTestUnit);
+		return newTestUnit;
+	}
+	
+	private void createTestUnitAnswers(long testUnitId, ParserTestModel parserTestModel) {
+		List<String> answers = parserTestModel.getTestAnswers();
+		boolean isCorrect = true;
+		for (String answer : answers) {
+			TestUnitAnswer testUnitAnswer = testUnitAnswerLocalService.createTestUnitAnswer(
+					counterLocalService.increment(TestUnitAnswer.class.getName()));
+			testUnitAnswer.setTestUnitId(testUnitId);
+			testUnitAnswer.setAnswerText(answer);
+			testUnitAnswer.setAnswerType(1);
+			testUnitAnswer.setIsCorrent(isCorrect);
+			testUnitAnswerLocalService.addTestUnitAnswer(testUnitAnswer);
 			
+			if (isCorrect) {
+				isCorrect = false;
+			}
 		}
 	}
 	

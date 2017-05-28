@@ -33,7 +33,8 @@
 			<generator class="assigned" />
 		</id>
 		<property column="number_" name="number" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="specializationId" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property column="code_" name="code" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="specializationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="questionText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="questionType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="questionDlFileEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />

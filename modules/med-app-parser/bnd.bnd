@@ -6,3 +6,4 @@ Import-Package: \
 	ru.dokstrudio.med.srv.service,\
 	ru.dokstrudio.med.srv.model,\
 	*
+Export-Package: ru.dokstudio.med.parser.api

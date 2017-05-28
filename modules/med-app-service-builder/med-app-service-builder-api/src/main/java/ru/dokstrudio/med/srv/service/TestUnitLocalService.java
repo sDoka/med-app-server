@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import ru.dokstrudio.med.srv.exception.NoSuchTestUnitException;
 import ru.dokstrudio.med.srv.model.TestUnit;
 
 import java.io.Serializable;
@@ -204,6 +205,9 @@ public interface TestUnitLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public TestUnit fetchTestUnit(long testUnitId);
+
+	public TestUnit findTestUnitByNumberAndSpecializationId(long number,
+		long specializationId) throws NoSuchTestUnitException;
 
 	/**
 	* Returns the test unit with the primary key.

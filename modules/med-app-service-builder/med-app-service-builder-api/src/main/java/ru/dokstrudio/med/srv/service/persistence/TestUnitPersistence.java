@@ -179,7 +179,8 @@ public interface TestUnitPersistence extends BasePersistence<TestUnit> {
 	* @param specializationId the specialization ID
 	* @return the matching test units
 	*/
-	public java.util.List<TestUnit> findBySpecializationId(int specializationId);
+	public java.util.List<TestUnit> findBySpecializationId(
+		long specializationId);
 
 	/**
 	* Returns a range of all the test units where specializationId = &#63;.
@@ -194,7 +195,7 @@ public interface TestUnitPersistence extends BasePersistence<TestUnit> {
 	* @return the range of matching test units
 	*/
 	public java.util.List<TestUnit> findBySpecializationId(
-		int specializationId, int start, int end);
+		long specializationId, int start, int end);
 
 	/**
 	* Returns an ordered range of all the test units where specializationId = &#63;.
@@ -210,7 +211,7 @@ public interface TestUnitPersistence extends BasePersistence<TestUnit> {
 	* @return the ordered range of matching test units
 	*/
 	public java.util.List<TestUnit> findBySpecializationId(
-		int specializationId, int start, int end,
+		long specializationId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<TestUnit> orderByComparator);
 
 	/**
@@ -228,7 +229,7 @@ public interface TestUnitPersistence extends BasePersistence<TestUnit> {
 	* @return the ordered range of matching test units
 	*/
 	public java.util.List<TestUnit> findBySpecializationId(
-		int specializationId, int start, int end,
+		long specializationId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<TestUnit> orderByComparator,
 		boolean retrieveFromCache);
 
@@ -240,7 +241,7 @@ public interface TestUnitPersistence extends BasePersistence<TestUnit> {
 	* @return the first matching test unit
 	* @throws NoSuchTestUnitException if a matching test unit could not be found
 	*/
-	public TestUnit findBySpecializationId_First(int specializationId,
+	public TestUnit findBySpecializationId_First(long specializationId,
 		com.liferay.portal.kernel.util.OrderByComparator<TestUnit> orderByComparator)
 		throws NoSuchTestUnitException;
 
@@ -251,7 +252,7 @@ public interface TestUnitPersistence extends BasePersistence<TestUnit> {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching test unit, or <code>null</code> if a matching test unit could not be found
 	*/
-	public TestUnit fetchBySpecializationId_First(int specializationId,
+	public TestUnit fetchBySpecializationId_First(long specializationId,
 		com.liferay.portal.kernel.util.OrderByComparator<TestUnit> orderByComparator);
 
 	/**
@@ -262,7 +263,7 @@ public interface TestUnitPersistence extends BasePersistence<TestUnit> {
 	* @return the last matching test unit
 	* @throws NoSuchTestUnitException if a matching test unit could not be found
 	*/
-	public TestUnit findBySpecializationId_Last(int specializationId,
+	public TestUnit findBySpecializationId_Last(long specializationId,
 		com.liferay.portal.kernel.util.OrderByComparator<TestUnit> orderByComparator)
 		throws NoSuchTestUnitException;
 
@@ -273,7 +274,7 @@ public interface TestUnitPersistence extends BasePersistence<TestUnit> {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching test unit, or <code>null</code> if a matching test unit could not be found
 	*/
-	public TestUnit fetchBySpecializationId_Last(int specializationId,
+	public TestUnit fetchBySpecializationId_Last(long specializationId,
 		com.liferay.portal.kernel.util.OrderByComparator<TestUnit> orderByComparator);
 
 	/**
@@ -286,7 +287,7 @@ public interface TestUnitPersistence extends BasePersistence<TestUnit> {
 	* @throws NoSuchTestUnitException if a test unit with the primary key could not be found
 	*/
 	public TestUnit[] findBySpecializationId_PrevAndNext(long testUnitId,
-		int specializationId,
+		long specializationId,
 		com.liferay.portal.kernel.util.OrderByComparator<TestUnit> orderByComparator)
 		throws NoSuchTestUnitException;
 
@@ -295,7 +296,7 @@ public interface TestUnitPersistence extends BasePersistence<TestUnit> {
 	*
 	* @param specializationId the specialization ID
 	*/
-	public void removeBySpecializationId(int specializationId);
+	public void removeBySpecializationId(long specializationId);
 
 	/**
 	* Returns the number of test units where specializationId = &#63;.
@@ -303,7 +304,59 @@ public interface TestUnitPersistence extends BasePersistence<TestUnit> {
 	* @param specializationId the specialization ID
 	* @return the number of matching test units
 	*/
-	public int countBySpecializationId(int specializationId);
+	public int countBySpecializationId(long specializationId);
+
+	/**
+	* Returns the test unit where number = &#63; and specializationId = &#63; or throws a {@link NoSuchTestUnitException} if it could not be found.
+	*
+	* @param number the number
+	* @param specializationId the specialization ID
+	* @return the matching test unit
+	* @throws NoSuchTestUnitException if a matching test unit could not be found
+	*/
+	public TestUnit findByTestUnitNumberAndSpecializationId(long number,
+		long specializationId) throws NoSuchTestUnitException;
+
+	/**
+	* Returns the test unit where number = &#63; and specializationId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param number the number
+	* @param specializationId the specialization ID
+	* @return the matching test unit, or <code>null</code> if a matching test unit could not be found
+	*/
+	public TestUnit fetchByTestUnitNumberAndSpecializationId(long number,
+		long specializationId);
+
+	/**
+	* Returns the test unit where number = &#63; and specializationId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param number the number
+	* @param specializationId the specialization ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching test unit, or <code>null</code> if a matching test unit could not be found
+	*/
+	public TestUnit fetchByTestUnitNumberAndSpecializationId(long number,
+		long specializationId, boolean retrieveFromCache);
+
+	/**
+	* Removes the test unit where number = &#63; and specializationId = &#63; from the database.
+	*
+	* @param number the number
+	* @param specializationId the specialization ID
+	* @return the test unit that was removed
+	*/
+	public TestUnit removeByTestUnitNumberAndSpecializationId(long number,
+		long specializationId) throws NoSuchTestUnitException;
+
+	/**
+	* Returns the number of test units where number = &#63; and specializationId = &#63;.
+	*
+	* @param number the number
+	* @param specializationId the specialization ID
+	* @return the number of matching test units
+	*/
+	public int countByTestUnitNumberAndSpecializationId(long number,
+		long specializationId);
 
 	/**
 	* Caches the test unit in the entity cache if it is enabled.

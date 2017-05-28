@@ -91,18 +91,33 @@ public interface TestUnitModel extends BaseModel<TestUnit> {
 	public void setNumber(long number);
 
 	/**
+	 * Returns the code of this test unit.
+	 *
+	 * @return the code of this test unit
+	 */
+	@AutoEscape
+	public String getCode();
+
+	/**
+	 * Sets the code of this test unit.
+	 *
+	 * @param code the code of this test unit
+	 */
+	public void setCode(String code);
+
+	/**
 	 * Returns the specialization ID of this test unit.
 	 *
 	 * @return the specialization ID of this test unit
 	 */
-	public int getSpecializationId();
+	public long getSpecializationId();
 
 	/**
 	 * Sets the specialization ID of this test unit.
 	 *
 	 * @param specializationId the specialization ID of this test unit
 	 */
-	public void setSpecializationId(int specializationId);
+	public void setSpecializationId(long specializationId);
 
 	/**
 	 * Returns the question text of this test unit.

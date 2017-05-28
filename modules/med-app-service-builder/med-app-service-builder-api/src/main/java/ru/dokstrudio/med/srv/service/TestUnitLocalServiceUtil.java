@@ -227,6 +227,14 @@ public class TestUnitLocalServiceUtil {
 		return getService().fetchTestUnit(testUnitId);
 	}
 
+	public static ru.dokstrudio.med.srv.model.TestUnit findTestUnitByNumberAndSpecializationId(
+		long number, long specializationId)
+		throws ru.dokstrudio.med.srv.exception.NoSuchTestUnitException {
+		return getService()
+				   .findTestUnitByNumberAndSpecializationId(number,
+			specializationId);
+	}
+
 	/**
 	* Returns the test unit with the primary key.
 	*

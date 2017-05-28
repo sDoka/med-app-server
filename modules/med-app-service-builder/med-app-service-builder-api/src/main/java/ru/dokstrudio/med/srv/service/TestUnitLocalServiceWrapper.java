@@ -234,6 +234,14 @@ public class TestUnitLocalServiceWrapper implements TestUnitLocalService,
 		return _testUnitLocalService.fetchTestUnit(testUnitId);
 	}
 
+	@Override
+	public ru.dokstrudio.med.srv.model.TestUnit findTestUnitByNumberAndSpecializationId(
+		long number, long specializationId)
+		throws ru.dokstrudio.med.srv.exception.NoSuchTestUnitException {
+		return _testUnitLocalService.findTestUnitByNumberAndSpecializationId(number,
+			specializationId);
+	}
+
 	/**
 	* Returns the test unit with the primary key.
 	*

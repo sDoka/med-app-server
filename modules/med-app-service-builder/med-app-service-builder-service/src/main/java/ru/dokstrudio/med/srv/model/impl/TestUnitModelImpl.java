@@ -64,7 +64,8 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "testUnitId", Types.BIGINT },
 			{ "number_", Types.BIGINT },
-			{ "specializationId", Types.INTEGER },
+			{ "code_", Types.VARCHAR },
+			{ "specializationId", Types.BIGINT },
 			{ "questionText", Types.VARCHAR },
 			{ "questionType", Types.INTEGER },
 			{ "questionDlFileEntryId", Types.BIGINT },
@@ -77,7 +78,8 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 	static {
 		TABLE_COLUMNS_MAP.put("testUnitId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("number_", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("specializationId", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("code_", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("specializationId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("questionText", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("questionType", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("questionDlFileEntryId", Types.BIGINT);
@@ -86,7 +88,7 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table med_TestUnit (testUnitId LONG not null primary key,number_ LONG,specializationId INTEGER,questionText VARCHAR(2000) null,questionType INTEGER,questionDlFileEntryId LONG,isActual BOOLEAN,createDate DATE null,modifiedDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table med_TestUnit (testUnitId LONG not null primary key,number_ LONG,code_ VARCHAR(75) null,specializationId LONG,questionText VARCHAR(2000) null,questionType INTEGER,questionDlFileEntryId LONG,isActual BOOLEAN,createDate DATE null,modifiedDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table med_TestUnit";
 	public static final String ORDER_BY_JPQL = " ORDER BY testUnit.testUnitId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY med_TestUnit.testUnitId ASC";
@@ -147,6 +149,7 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 
 		attributes.put("testUnitId", getTestUnitId());
 		attributes.put("number", getNumber());
+		attributes.put("code", getCode());
 		attributes.put("specializationId", getSpecializationId());
 		attributes.put("questionText", getQuestionText());
 		attributes.put("questionType", getQuestionType());
@@ -175,7 +178,13 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 			setNumber(number);
 		}
 
-		Integer specializationId = (Integer)attributes.get("specializationId");
+		String code = (String)attributes.get("code");
+
+		if (code != null) {
+			setCode(code);
+		}
+
+		Long specializationId = (Long)attributes.get("specializationId");
 
 		if (specializationId != null) {
 			setSpecializationId(specializationId);
@@ -252,12 +261,27 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 	}
 
 	@Override
-	public int getSpecializationId() {
+	public String getCode() {
+		if (_code == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _code;
+		}
+	}
+
+	@Override
+	public void setCode(String code) {
+		_code = code;
+	}
+
+	@Override
+	public long getSpecializationId() {
 		return _specializationId;
 	}
 
 	@Override
-	public void setSpecializationId(int specializationId) {
+	public void setSpecializationId(long specializationId) {
 		_columnBitmask |= SPECIALIZATIONID_COLUMN_BITMASK;
 
 		if (!_setOriginalSpecializationId) {
@@ -269,7 +293,7 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 		_specializationId = specializationId;
 	}
 
-	public int getOriginalSpecializationId() {
+	public long getOriginalSpecializationId() {
 		return _originalSpecializationId;
 	}
 
@@ -382,6 +406,7 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 
 		testUnitImpl.setTestUnitId(getTestUnitId());
 		testUnitImpl.setNumber(getNumber());
+		testUnitImpl.setCode(getCode());
 		testUnitImpl.setSpecializationId(getSpecializationId());
 		testUnitImpl.setQuestionText(getQuestionText());
 		testUnitImpl.setQuestionType(getQuestionType());
@@ -472,6 +497,14 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 
 		testUnitCacheModel.number = getNumber();
 
+		testUnitCacheModel.code = getCode();
+
+		String code = testUnitCacheModel.code;
+
+		if ((code != null) && (code.length() == 0)) {
+			testUnitCacheModel.code = null;
+		}
+
 		testUnitCacheModel.specializationId = getSpecializationId();
 
 		testUnitCacheModel.questionText = getQuestionText();
@@ -511,12 +544,14 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{testUnitId=");
 		sb.append(getTestUnitId());
 		sb.append(", number=");
 		sb.append(getNumber());
+		sb.append(", code=");
+		sb.append(getCode());
 		sb.append(", specializationId=");
 		sb.append(getSpecializationId());
 		sb.append(", questionText=");
@@ -538,7 +573,7 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("ru.dokstrudio.med.srv.model.TestUnit");
@@ -551,6 +586,10 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 		sb.append(
 			"<column><column-name>number</column-name><column-value><![CDATA[");
 		sb.append(getNumber());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>code</column-name><column-value><![CDATA[");
+		sb.append(getCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>specializationId</column-name><column-value><![CDATA[");
@@ -594,8 +633,9 @@ public class TestUnitModelImpl extends BaseModelImpl<TestUnit>
 	private long _number;
 	private long _originalNumber;
 	private boolean _setOriginalNumber;
-	private int _specializationId;
-	private int _originalSpecializationId;
+	private String _code;
+	private long _specializationId;
+	private long _originalSpecializationId;
 	private boolean _setOriginalSpecializationId;
 	private String _questionText;
 	private int _questionType;

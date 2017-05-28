@@ -59,6 +59,7 @@ public class TestUnitWrapper implements TestUnit, ModelWrapper<TestUnit> {
 
 		attributes.put("testUnitId", getTestUnitId());
 		attributes.put("number", getNumber());
+		attributes.put("code", getCode());
 		attributes.put("specializationId", getSpecializationId());
 		attributes.put("questionText", getQuestionText());
 		attributes.put("questionType", getQuestionType());
@@ -84,7 +85,13 @@ public class TestUnitWrapper implements TestUnit, ModelWrapper<TestUnit> {
 			setNumber(number);
 		}
 
-		Integer specializationId = (Integer)attributes.get("specializationId");
+		String code = (String)attributes.get("code");
+
+		if (code != null) {
+			setCode(code);
+		}
+
+		Long specializationId = (Long)attributes.get("specializationId");
 
 		if (specializationId != null) {
 			setSpecializationId(specializationId);
@@ -188,16 +195,6 @@ public class TestUnitWrapper implements TestUnit, ModelWrapper<TestUnit> {
 		return _testUnit.getQuestionType();
 	}
 
-	/**
-	* Returns the specialization ID of this test unit.
-	*
-	* @return the specialization ID of this test unit
-	*/
-	@Override
-	public int getSpecializationId() {
-		return _testUnit.getSpecializationId();
-	}
-
 	@Override
 	public int hashCode() {
 		return _testUnit.hashCode();
@@ -211,6 +208,16 @@ public class TestUnitWrapper implements TestUnit, ModelWrapper<TestUnit> {
 	@Override
 	public java.lang.Object clone() {
 		return new TestUnitWrapper((TestUnit)_testUnit.clone());
+	}
+
+	/**
+	* Returns the code of this test unit.
+	*
+	* @return the code of this test unit
+	*/
+	@Override
+	public java.lang.String getCode() {
+		return _testUnit.getCode();
 	}
 
 	/**
@@ -284,6 +291,16 @@ public class TestUnitWrapper implements TestUnit, ModelWrapper<TestUnit> {
 	}
 
 	/**
+	* Returns the specialization ID of this test unit.
+	*
+	* @return the specialization ID of this test unit
+	*/
+	@Override
+	public long getSpecializationId() {
+		return _testUnit.getSpecializationId();
+	}
+
+	/**
 	* Returns the test unit ID of this test unit.
 	*
 	* @return the test unit ID of this test unit
@@ -311,6 +328,16 @@ public class TestUnitWrapper implements TestUnit, ModelWrapper<TestUnit> {
 	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_testUnit.setCachedModel(cachedModel);
+	}
+
+	/**
+	* Sets the code of this test unit.
+	*
+	* @param code the code of this test unit
+	*/
+	@Override
+	public void setCode(java.lang.String code) {
+		_testUnit.setCode(code);
 	}
 
 	/**
@@ -425,7 +452,7 @@ public class TestUnitWrapper implements TestUnit, ModelWrapper<TestUnit> {
 	* @param specializationId the specialization ID of this test unit
 	*/
 	@Override
-	public void setSpecializationId(int specializationId) {
+	public void setSpecializationId(long specializationId) {
 		_testUnit.setSpecializationId(specializationId);
 	}
 

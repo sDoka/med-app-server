@@ -9,7 +9,8 @@
 		uuid="false">
 		<column name="testUnitId" type="long" primary="true"></column>
 		<column name="number" type="long"></column>
-		<column name="specializationId" type="int"></column>
+        <column name="code" type="String"></column>
+		<column name="specializationId" type="long"></column>
 		<column name="questionText" type="String"></column>
 		<column name="questionType" type="int"></column>
 		<column name="questionDlFileEntryId" type="long"></column>
@@ -24,6 +25,10 @@
 		<finder return-type="Collection" name="SpecializationId">
 			<finder-column name="specializationId"></finder-column>
 		</finder>
+        <finder name="TestUnitNumberAndSpecializationId" return-type="TestUnit">
+            <finder-column name="number"></finder-column>
+            <finder-column name="specializationId"></finder-column>
+        </finder>
 	</entity>
 
 	<entity name="TestUnitAnswer" local-service="true"

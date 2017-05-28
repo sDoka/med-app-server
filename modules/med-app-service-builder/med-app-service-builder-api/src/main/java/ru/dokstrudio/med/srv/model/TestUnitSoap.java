@@ -35,6 +35,7 @@ public class TestUnitSoap implements Serializable {
 
 		soapModel.setTestUnitId(model.getTestUnitId());
 		soapModel.setNumber(model.getNumber());
+		soapModel.setCode(model.getCode());
 		soapModel.setSpecializationId(model.getSpecializationId());
 		soapModel.setQuestionText(model.getQuestionText());
 		soapModel.setQuestionType(model.getQuestionType());
@@ -110,11 +111,19 @@ public class TestUnitSoap implements Serializable {
 		_number = number;
 	}
 
-	public int getSpecializationId() {
+	public String getCode() {
+		return _code;
+	}
+
+	public void setCode(String code) {
+		_code = code;
+	}
+
+	public long getSpecializationId() {
 		return _specializationId;
 	}
 
-	public void setSpecializationId(int specializationId) {
+	public void setSpecializationId(long specializationId) {
 		_specializationId = specializationId;
 	}
 
@@ -172,7 +181,8 @@ public class TestUnitSoap implements Serializable {
 
 	private long _testUnitId;
 	private long _number;
-	private int _specializationId;
+	private String _code;
+	private long _specializationId;
 	private String _questionText;
 	private int _questionType;
 	private long _questionDlFileEntryId;

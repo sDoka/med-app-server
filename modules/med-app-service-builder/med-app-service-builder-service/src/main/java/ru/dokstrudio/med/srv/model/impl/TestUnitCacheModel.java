@@ -65,12 +65,14 @@ public class TestUnitCacheModel implements CacheModel<TestUnit>, Externalizable 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{testUnitId=");
 		sb.append(testUnitId);
 		sb.append(", number=");
 		sb.append(number);
+		sb.append(", code=");
+		sb.append(code);
 		sb.append(", specializationId=");
 		sb.append(specializationId);
 		sb.append(", questionText=");
@@ -96,6 +98,14 @@ public class TestUnitCacheModel implements CacheModel<TestUnit>, Externalizable 
 
 		testUnitImpl.setTestUnitId(testUnitId);
 		testUnitImpl.setNumber(number);
+
+		if (code == null) {
+			testUnitImpl.setCode(StringPool.BLANK);
+		}
+		else {
+			testUnitImpl.setCode(code);
+		}
+
 		testUnitImpl.setSpecializationId(specializationId);
 
 		if (questionText == null) {
@@ -133,8 +143,9 @@ public class TestUnitCacheModel implements CacheModel<TestUnit>, Externalizable 
 		testUnitId = objectInput.readLong();
 
 		number = objectInput.readLong();
+		code = objectInput.readUTF();
 
-		specializationId = objectInput.readInt();
+		specializationId = objectInput.readLong();
 		questionText = objectInput.readUTF();
 
 		questionType = objectInput.readInt();
@@ -153,7 +164,14 @@ public class TestUnitCacheModel implements CacheModel<TestUnit>, Externalizable 
 
 		objectOutput.writeLong(number);
 
-		objectOutput.writeInt(specializationId);
+		if (code == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(code);
+		}
+
+		objectOutput.writeLong(specializationId);
 
 		if (questionText == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -173,7 +191,8 @@ public class TestUnitCacheModel implements CacheModel<TestUnit>, Externalizable 
 
 	public long testUnitId;
 	public long number;
-	public int specializationId;
+	public String code;
+	public long specializationId;
 	public String questionText;
 	public int questionType;
 	public long questionDlFileEntryId;

@@ -17,7 +17,8 @@ create table med_ApplicationUsage (
 create table med_TestUnit (
 	testUnitId LONG not null primary key,
 	number_ LONG,
-	specializationId INTEGER,
+	code_ VARCHAR(75) null,
+	specializationId LONG,
 	questionText VARCHAR(2000) null,
 	questionType INTEGER,
 	questionDlFileEntryId LONG,

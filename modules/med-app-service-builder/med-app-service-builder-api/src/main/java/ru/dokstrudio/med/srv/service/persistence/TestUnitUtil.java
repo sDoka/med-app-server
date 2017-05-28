@@ -276,7 +276,7 @@ public class TestUnitUtil {
 	* @param specializationId the specialization ID
 	* @return the matching test units
 	*/
-	public static List<TestUnit> findBySpecializationId(int specializationId) {
+	public static List<TestUnit> findBySpecializationId(long specializationId) {
 		return getPersistence().findBySpecializationId(specializationId);
 	}
 
@@ -292,7 +292,7 @@ public class TestUnitUtil {
 	* @param end the upper bound of the range of test units (not inclusive)
 	* @return the range of matching test units
 	*/
-	public static List<TestUnit> findBySpecializationId(int specializationId,
+	public static List<TestUnit> findBySpecializationId(long specializationId,
 		int start, int end) {
 		return getPersistence()
 				   .findBySpecializationId(specializationId, start, end);
@@ -311,7 +311,7 @@ public class TestUnitUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching test units
 	*/
-	public static List<TestUnit> findBySpecializationId(int specializationId,
+	public static List<TestUnit> findBySpecializationId(long specializationId,
 		int start, int end, OrderByComparator<TestUnit> orderByComparator) {
 		return getPersistence()
 				   .findBySpecializationId(specializationId, start, end,
@@ -332,7 +332,7 @@ public class TestUnitUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching test units
 	*/
-	public static List<TestUnit> findBySpecializationId(int specializationId,
+	public static List<TestUnit> findBySpecializationId(long specializationId,
 		int start, int end, OrderByComparator<TestUnit> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
@@ -348,7 +348,7 @@ public class TestUnitUtil {
 	* @return the first matching test unit
 	* @throws NoSuchTestUnitException if a matching test unit could not be found
 	*/
-	public static TestUnit findBySpecializationId_First(int specializationId,
+	public static TestUnit findBySpecializationId_First(long specializationId,
 		OrderByComparator<TestUnit> orderByComparator)
 		throws ru.dokstrudio.med.srv.exception.NoSuchTestUnitException {
 		return getPersistence()
@@ -363,8 +363,8 @@ public class TestUnitUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching test unit, or <code>null</code> if a matching test unit could not be found
 	*/
-	public static TestUnit fetchBySpecializationId_First(int specializationId,
-		OrderByComparator<TestUnit> orderByComparator) {
+	public static TestUnit fetchBySpecializationId_First(
+		long specializationId, OrderByComparator<TestUnit> orderByComparator) {
 		return getPersistence()
 				   .fetchBySpecializationId_First(specializationId,
 			orderByComparator);
@@ -378,7 +378,7 @@ public class TestUnitUtil {
 	* @return the last matching test unit
 	* @throws NoSuchTestUnitException if a matching test unit could not be found
 	*/
-	public static TestUnit findBySpecializationId_Last(int specializationId,
+	public static TestUnit findBySpecializationId_Last(long specializationId,
 		OrderByComparator<TestUnit> orderByComparator)
 		throws ru.dokstrudio.med.srv.exception.NoSuchTestUnitException {
 		return getPersistence()
@@ -393,7 +393,7 @@ public class TestUnitUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching test unit, or <code>null</code> if a matching test unit could not be found
 	*/
-	public static TestUnit fetchBySpecializationId_Last(int specializationId,
+	public static TestUnit fetchBySpecializationId_Last(long specializationId,
 		OrderByComparator<TestUnit> orderByComparator) {
 		return getPersistence()
 				   .fetchBySpecializationId_Last(specializationId,
@@ -410,7 +410,7 @@ public class TestUnitUtil {
 	* @throws NoSuchTestUnitException if a test unit with the primary key could not be found
 	*/
 	public static TestUnit[] findBySpecializationId_PrevAndNext(
-		long testUnitId, int specializationId,
+		long testUnitId, long specializationId,
 		OrderByComparator<TestUnit> orderByComparator)
 		throws ru.dokstrudio.med.srv.exception.NoSuchTestUnitException {
 		return getPersistence()
@@ -423,7 +423,7 @@ public class TestUnitUtil {
 	*
 	* @param specializationId the specialization ID
 	*/
-	public static void removeBySpecializationId(int specializationId) {
+	public static void removeBySpecializationId(long specializationId) {
 		getPersistence().removeBySpecializationId(specializationId);
 	}
 
@@ -433,8 +433,82 @@ public class TestUnitUtil {
 	* @param specializationId the specialization ID
 	* @return the number of matching test units
 	*/
-	public static int countBySpecializationId(int specializationId) {
+	public static int countBySpecializationId(long specializationId) {
 		return getPersistence().countBySpecializationId(specializationId);
+	}
+
+	/**
+	* Returns the test unit where number = &#63; and specializationId = &#63; or throws a {@link NoSuchTestUnitException} if it could not be found.
+	*
+	* @param number the number
+	* @param specializationId the specialization ID
+	* @return the matching test unit
+	* @throws NoSuchTestUnitException if a matching test unit could not be found
+	*/
+	public static TestUnit findByTestUnitNumberAndSpecializationId(
+		long number, long specializationId)
+		throws ru.dokstrudio.med.srv.exception.NoSuchTestUnitException {
+		return getPersistence()
+				   .findByTestUnitNumberAndSpecializationId(number,
+			specializationId);
+	}
+
+	/**
+	* Returns the test unit where number = &#63; and specializationId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param number the number
+	* @param specializationId the specialization ID
+	* @return the matching test unit, or <code>null</code> if a matching test unit could not be found
+	*/
+	public static TestUnit fetchByTestUnitNumberAndSpecializationId(
+		long number, long specializationId) {
+		return getPersistence()
+				   .fetchByTestUnitNumberAndSpecializationId(number,
+			specializationId);
+	}
+
+	/**
+	* Returns the test unit where number = &#63; and specializationId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param number the number
+	* @param specializationId the specialization ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching test unit, or <code>null</code> if a matching test unit could not be found
+	*/
+	public static TestUnit fetchByTestUnitNumberAndSpecializationId(
+		long number, long specializationId, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByTestUnitNumberAndSpecializationId(number,
+			specializationId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the test unit where number = &#63; and specializationId = &#63; from the database.
+	*
+	* @param number the number
+	* @param specializationId the specialization ID
+	* @return the test unit that was removed
+	*/
+	public static TestUnit removeByTestUnitNumberAndSpecializationId(
+		long number, long specializationId)
+		throws ru.dokstrudio.med.srv.exception.NoSuchTestUnitException {
+		return getPersistence()
+				   .removeByTestUnitNumberAndSpecializationId(number,
+			specializationId);
+	}
+
+	/**
+	* Returns the number of test units where number = &#63; and specializationId = &#63;.
+	*
+	* @param number the number
+	* @param specializationId the specialization ID
+	* @return the number of matching test units
+	*/
+	public static int countByTestUnitNumberAndSpecializationId(long number,
+		long specializationId) {
+		return getPersistence()
+				   .countByTestUnitNumberAndSpecializationId(number,
+			specializationId);
 	}
 
 	/**

@@ -15,8 +15,12 @@
 package ru.dokstrudio.med.srv.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
-
+import ru.dokstrudio.med.srv.exception.NoSuchTestUnitException;
+import ru.dokstrudio.med.srv.model.TestUnit;
 import ru.dokstrudio.med.srv.service.base.TestUnitLocalServiceBaseImpl;
+import ru.dokstrudio.med.srv.service.persistence.TestUnitPersistence;
+import ru.dokstrudio.med.srv.service.persistence.TestUnitUtil;
+import ru.dokstrudio.med.srv.service.persistence.impl.TestUnitPersistenceImpl;
 
 /**
  * The implementation of the test unit local service.
@@ -39,4 +43,8 @@ public class TestUnitLocalServiceImpl extends TestUnitLocalServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Always use {@link ru.dokstrudio.med.srv.service.TestUnitLocalServiceUtil} to access the test unit local service.
 	 */
+	
+	public TestUnit findTestUnitByNumberAndSpecializationId(long number, long specializationId) throws NoSuchTestUnitException {
+		return TestUnitUtil.findByTestUnitNumberAndSpecializationId(number, specializationId);
+	}
 }

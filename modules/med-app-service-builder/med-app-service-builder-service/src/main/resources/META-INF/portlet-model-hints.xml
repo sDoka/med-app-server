@@ -18,7 +18,8 @@
 	<model name="ru.dokstrudio.med.srv.model.TestUnit">
 		<field name="testUnitId" type="long" />
 		<field name="number" type="long" />
-		<field name="specializationId" type="int" />
+		<field name="code" type="String" />
+		<field name="specializationId" type="long" />
 		<field name="questionText" type="String">
 			<hint name="max-length">2000</hint>
 		</field>
