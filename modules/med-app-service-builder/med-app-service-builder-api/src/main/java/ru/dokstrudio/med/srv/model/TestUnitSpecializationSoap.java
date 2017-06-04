@@ -35,6 +35,7 @@ public class TestUnitSpecializationSoap implements Serializable {
 
 		soapModel.setSpecializationId(model.getSpecializationId());
 		soapModel.setNameLocalizationKey(model.getNameLocalizationKey());
+		soapModel.setSpecialiationIcon(model.getSpecialiationIcon());
 
 		return soapModel;
 	}
@@ -106,6 +107,15 @@ public class TestUnitSpecializationSoap implements Serializable {
 		_nameLocalizationKey = nameLocalizationKey;
 	}
 
+	public String getSpecialiationIcon() {
+		return _specialiationIcon;
+	}
+
+	public void setSpecialiationIcon(String specialiationIcon) {
+		_specialiationIcon = specialiationIcon;
+	}
+
 	private long _specializationId;
 	private String _nameLocalizationKey;
+	private String _specialiationIcon;
 }

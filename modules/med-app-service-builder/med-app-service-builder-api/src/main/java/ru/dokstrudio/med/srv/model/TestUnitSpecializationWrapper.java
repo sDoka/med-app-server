@@ -60,6 +60,7 @@ public class TestUnitSpecializationWrapper implements TestUnitSpecialization,
 
 		attributes.put("specializationId", getSpecializationId());
 		attributes.put("nameLocalizationKey", getNameLocalizationKey());
+		attributes.put("specialiationIcon", getSpecialiationIcon());
 
 		return attributes;
 	}
@@ -77,6 +78,12 @@ public class TestUnitSpecializationWrapper implements TestUnitSpecialization,
 
 		if (nameLocalizationKey != null) {
 			setNameLocalizationKey(nameLocalizationKey);
+		}
+
+		String specialiationIcon = (String)attributes.get("specialiationIcon");
+
+		if (specialiationIcon != null) {
+			setSpecialiationIcon(specialiationIcon);
 		}
 	}
 
@@ -134,6 +141,16 @@ public class TestUnitSpecializationWrapper implements TestUnitSpecialization,
 	@Override
 	public java.lang.String getNameLocalizationKey() {
 		return _testUnitSpecialization.getNameLocalizationKey();
+	}
+
+	/**
+	* Returns the specialiation icon of this test unit specialization.
+	*
+	* @return the specialiation icon of this test unit specialization
+	*/
+	@Override
+	public java.lang.String getSpecialiationIcon() {
+		return _testUnitSpecialization.getSpecialiationIcon();
 	}
 
 	@Override
@@ -230,6 +247,16 @@ public class TestUnitSpecializationWrapper implements TestUnitSpecialization,
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_testUnitSpecialization.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets the specialiation icon of this test unit specialization.
+	*
+	* @param specialiationIcon the specialiation icon of this test unit specialization
+	*/
+	@Override
+	public void setSpecialiationIcon(java.lang.String specialiationIcon) {
+		_testUnitSpecialization.setSpecialiationIcon(specialiationIcon);
 	}
 
 	/**

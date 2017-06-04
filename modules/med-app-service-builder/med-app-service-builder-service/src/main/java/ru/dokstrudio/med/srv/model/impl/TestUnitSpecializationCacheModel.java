@@ -64,12 +64,14 @@ public class TestUnitSpecializationCacheModel implements CacheModel<TestUnitSpec
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{specializationId=");
 		sb.append(specializationId);
 		sb.append(", nameLocalizationKey=");
 		sb.append(nameLocalizationKey);
+		sb.append(", specialiationIcon=");
+		sb.append(specialiationIcon);
 		sb.append("}");
 
 		return sb.toString();
@@ -88,6 +90,13 @@ public class TestUnitSpecializationCacheModel implements CacheModel<TestUnitSpec
 			testUnitSpecializationImpl.setNameLocalizationKey(nameLocalizationKey);
 		}
 
+		if (specialiationIcon == null) {
+			testUnitSpecializationImpl.setSpecialiationIcon(StringPool.BLANK);
+		}
+		else {
+			testUnitSpecializationImpl.setSpecialiationIcon(specialiationIcon);
+		}
+
 		testUnitSpecializationImpl.resetOriginalValues();
 
 		return testUnitSpecializationImpl;
@@ -97,6 +106,7 @@ public class TestUnitSpecializationCacheModel implements CacheModel<TestUnitSpec
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		specializationId = objectInput.readLong();
 		nameLocalizationKey = objectInput.readUTF();
+		specialiationIcon = objectInput.readUTF();
 	}
 
 	@Override
@@ -110,8 +120,16 @@ public class TestUnitSpecializationCacheModel implements CacheModel<TestUnitSpec
 		else {
 			objectOutput.writeUTF(nameLocalizationKey);
 		}
+
+		if (specialiationIcon == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(specialiationIcon);
+		}
 	}
 
 	public long specializationId;
 	public String nameLocalizationKey;
+	public String specialiationIcon;
 }

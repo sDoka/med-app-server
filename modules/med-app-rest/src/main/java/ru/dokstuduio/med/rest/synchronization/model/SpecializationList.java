@@ -21,6 +21,8 @@ public class SpecializationList {
 			builder.append("\",\"nameLocalizationKey\":\"");
 			//TODO: get localization by key
 			builder.append(specialization.getNameLocalizationKey());
+			builder.append("\",\"specializationIcon\":\"");
+			builder.append(specialization.getSpecialiationIcon());
 			builder.append("\"},");
 		}
 		if (specializationList.size() > 0) {

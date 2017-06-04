@@ -46,7 +46,8 @@ create table med_TestUnitAttempt (
 
 create table med_TestUnitSpecialization (
 	specializationId LONG not null primary key,
-	nameLocalizationKey VARCHAR(75) null
+	nameLocalizationKey VARCHAR(75) null,
+	specialiationIcon VARCHAR(75) null
 );
 
 create table med_UserAccount (

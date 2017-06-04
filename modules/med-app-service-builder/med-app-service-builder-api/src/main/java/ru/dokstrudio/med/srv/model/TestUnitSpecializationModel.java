@@ -89,6 +89,21 @@ public interface TestUnitSpecializationModel extends BaseModel<TestUnitSpecializ
 	 */
 	public void setNameLocalizationKey(String nameLocalizationKey);
 
+	/**
+	 * Returns the specialiation icon of this test unit specialization.
+	 *
+	 * @return the specialiation icon of this test unit specialization
+	 */
+	@AutoEscape
+	public String getSpecialiationIcon();
+
+	/**
+	 * Sets the specialiation icon of this test unit specialization.
+	 *
+	 * @param specialiationIcon the specialiation icon of this test unit specialization
+	 */
+	public void setSpecialiationIcon(String specialiationIcon);
+
 	@Override
 	public boolean isNew();
 
