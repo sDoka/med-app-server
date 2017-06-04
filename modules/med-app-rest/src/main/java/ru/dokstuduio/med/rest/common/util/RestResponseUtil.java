@@ -10,6 +10,7 @@ public class RestResponseUtil {
 	private long responseCode;
 	private String responseStatus;
 	private String responseBody;
+	private String errorResponse;
 	
 	private RestResponseUtil(long responseCode, String responseStatus, String responseBody) {
 		this.responseCode = responseCode;
@@ -32,11 +33,16 @@ public class RestResponseUtil {
 		builder.append(responseCode);
 		builder.append("\",\"responseStatus\":\"");
 		builder.append(responseStatus);
-		builder.append("\",\"responseBody\":");
+		if (ERROR_STATUS.equals(responseStatus)) {
+			builder.append("\",\"responseError\":");
+
+		} else {
+			builder.append("\",\"responseBody\":");
+
+		}
 		builder.append(responseBody);
 		builder.append("}");
 		return builder.toString();
 	}
-	
 	
 }
