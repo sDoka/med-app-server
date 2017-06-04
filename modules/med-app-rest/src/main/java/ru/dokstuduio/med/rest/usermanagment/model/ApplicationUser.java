@@ -12,6 +12,7 @@ public class ApplicationUser {
 	int userAccountTypeId;
 	long actualDeviceId;
 	Date lastSynchronizationDate;
+	long lastSynchronizationDateTime;
 	
 	public ApplicationUser(User user) {
 		this.userId = user.getUserId();
@@ -20,6 +21,7 @@ public class ApplicationUser {
 		//TODO implement device binding and synchronization upd
 		this.actualDeviceId = 1;
 		this.lastSynchronizationDate = new Date();
+		lastSynchronizationDateTime = lastSynchronizationDate.getTime();
 	}
 
 	@Override
@@ -36,7 +38,7 @@ public class ApplicationUser {
 		builder.append("\",\"actualDeviceId\":\"");
 		builder.append(actualDeviceId);
 		builder.append("\",\"lastSynchronizationDate\":\"");
-		builder.append(lastSynchronizationDate);
+		builder.append(lastSynchronizationDateTime);
 		builder.append("\"}");
 		return builder.toString();
 	}
