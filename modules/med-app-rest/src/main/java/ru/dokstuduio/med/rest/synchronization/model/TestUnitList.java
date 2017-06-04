@@ -69,6 +69,8 @@ public class TestUnitList {
 			for (TestUnitAnswer testUnitAnswer : this.testUnitAnswers.get(testUnit.getTestUnitId())) {
 				builder.append("{\"testUnitAnswerId\":\"");
 				builder.append(testUnitAnswer.getTestUnitAnswerId());
+				builder.append("\",\"testUnitId\":\"");
+				builder.append(testUnit.getTestUnitId());
 				builder.append("\",\"testUnitAnswerText\":\"");
 				builder.append(testUnitAnswer.getAnswerText());
 				builder.append("\",\"testUnitAnswerType\":\"");
