@@ -17,7 +17,9 @@ public class UserAccountList {
 		StringBuilder builder = new StringBuilder();
 		builder.append("{\"userAccounts\":[");
 		for (UserAccount userAccount : userAccountList) {
-			builder.append("{\"userAccountId\":\"");
+			builder.append("{\"userId\":\"");
+			builder.append(userAccount.getUserId());
+			builder.append("\",\"userAccountId\":\"");
 			builder.append(userAccount.getAccountTypeId());
 			builder.append("\",\"activationDate\":\"");
 			builder.append(userAccount.getActivationDate());

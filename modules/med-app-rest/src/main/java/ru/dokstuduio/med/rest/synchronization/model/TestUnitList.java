@@ -54,6 +54,8 @@ public class TestUnitList {
 			builder.append(testUnit.getNumber());
 			builder.append("\",\"testUnitCode\":\"");
 			builder.append(testUnit.getCode());
+			builder.append("\",\"testUnitSpecializationId\":\"");
+			builder.append(testUnit.getSpecializationId());
 			builder.append("\",\"testUnitText\":\"");
 			builder.append(testUnit.getQuestionText());
 			builder.append("\",\"testUnitType\":\"");
