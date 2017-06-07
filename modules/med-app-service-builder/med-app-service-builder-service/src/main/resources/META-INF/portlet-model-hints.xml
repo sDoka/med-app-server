@@ -49,7 +49,7 @@
 	<model name="ru.dokstrudio.med.srv.model.TestUnitSpecialization">
 		<field name="specializationId" type="long" />
 		<field name="nameLocalizationKey" type="String" />
-		<field name="specialiationIcon" type="String" />
+		<field name="specializationIcon" type="String" />
 	</model>
 	<model name="ru.dokstrudio.med.srv.model.UserAccount">
 		<field name="userId" type="long" />

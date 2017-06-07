@@ -326,7 +326,7 @@ public class TestUnitSpecializationPersistenceImpl extends BasePersistenceImpl<T
 
 		testUnitSpecializationImpl.setSpecializationId(testUnitSpecialization.getSpecializationId());
 		testUnitSpecializationImpl.setNameLocalizationKey(testUnitSpecialization.getNameLocalizationKey());
-		testUnitSpecializationImpl.setSpecialiationIcon(testUnitSpecialization.getSpecialiationIcon());
+		testUnitSpecializationImpl.setSpecializationIcon(testUnitSpecialization.getSpecializationIcon());
 
 		return testUnitSpecializationImpl;
 	}

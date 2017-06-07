@@ -70,8 +70,8 @@ public class TestUnitSpecializationCacheModel implements CacheModel<TestUnitSpec
 		sb.append(specializationId);
 		sb.append(", nameLocalizationKey=");
 		sb.append(nameLocalizationKey);
-		sb.append(", specialiationIcon=");
-		sb.append(specialiationIcon);
+		sb.append(", specializationIcon=");
+		sb.append(specializationIcon);
 		sb.append("}");
 
 		return sb.toString();
@@ -90,11 +90,11 @@ public class TestUnitSpecializationCacheModel implements CacheModel<TestUnitSpec
 			testUnitSpecializationImpl.setNameLocalizationKey(nameLocalizationKey);
 		}
 
-		if (specialiationIcon == null) {
-			testUnitSpecializationImpl.setSpecialiationIcon(StringPool.BLANK);
+		if (specializationIcon == null) {
+			testUnitSpecializationImpl.setSpecializationIcon(StringPool.BLANK);
 		}
 		else {
-			testUnitSpecializationImpl.setSpecialiationIcon(specialiationIcon);
+			testUnitSpecializationImpl.setSpecializationIcon(specializationIcon);
 		}
 
 		testUnitSpecializationImpl.resetOriginalValues();
@@ -106,7 +106,7 @@ public class TestUnitSpecializationCacheModel implements CacheModel<TestUnitSpec
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		specializationId = objectInput.readLong();
 		nameLocalizationKey = objectInput.readUTF();
-		specialiationIcon = objectInput.readUTF();
+		specializationIcon = objectInput.readUTF();
 	}
 
 	@Override
@@ -121,15 +121,15 @@ public class TestUnitSpecializationCacheModel implements CacheModel<TestUnitSpec
 			objectOutput.writeUTF(nameLocalizationKey);
 		}
 
-		if (specialiationIcon == null) {
+		if (specializationIcon == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(specialiationIcon);
+			objectOutput.writeUTF(specializationIcon);
 		}
 	}
 
 	public long specializationId;
 	public String nameLocalizationKey;
-	public String specialiationIcon;
+	public String specializationIcon;
 }

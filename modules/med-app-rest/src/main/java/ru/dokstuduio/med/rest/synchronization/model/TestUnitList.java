@@ -63,9 +63,9 @@ public class TestUnitList {
 			builder.append("\",\"testUnitDLFileEntryId\":\"");
 			builder.append(testUnit.getQuestionDlFileEntryId());
 			builder.append("\",\"testUnitCreateDate\":\"");
-			builder.append(testUnit.getCreateDate());
+			builder.append(testUnit.getCreateDate().getTime()/1000);
 			builder.append("\",\"testUnitModifiedDate\":\"");
-			builder.append(testUnit.getModifiedDate());
+			builder.append(testUnit.getModifiedDate().getTime()/1000);
 			builder.append("\",\"testUnitAnswers\":");
 			builder.append("[");
 			for (TestUnitAnswer testUnitAnswer : this.testUnitAnswers.get(testUnit.getTestUnitId())) {

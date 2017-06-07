@@ -22,7 +22,7 @@ public class SpecializationList {
 			//TODO: get localization by key
 			builder.append(specialization.getNameLocalizationKey());
 			builder.append("\",\"specializationIcon\":\"");
-			builder.append(specialization.getSpecialiationIcon());
+			builder.append(specialization.getSpecializationIcon());
 			builder.append("\"},");
 		}
 		if (specializationList.size() > 0) {

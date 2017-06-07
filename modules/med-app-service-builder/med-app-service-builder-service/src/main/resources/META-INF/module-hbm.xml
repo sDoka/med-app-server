@@ -66,7 +66,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="nameLocalizationKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="specialiationIcon" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="specializationIcon" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="ru.dokstrudio.med.srv.model.impl.UserAccountImpl" table="med_UserAccount">
 		<composite-id class="ru.dokstrudio.med.srv.service.persistence.UserAccountPK" name="primaryKey">

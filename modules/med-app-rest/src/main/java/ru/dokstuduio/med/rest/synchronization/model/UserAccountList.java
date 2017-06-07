@@ -22,9 +22,9 @@ public class UserAccountList {
 			builder.append("\",\"userAccountId\":\"");
 			builder.append(userAccount.getAccountTypeId());
 			builder.append("\",\"activationDate\":\"");
-			builder.append(userAccount.getActivationDate());
+			builder.append(userAccount.getActivationDate().getTime()/1000);
 			builder.append("\",\"expirationDate\":\"");
-			builder.append(userAccount.getExpirationDate());
+			builder.append(userAccount.getExpirationDate().getTime()/1000);
 			builder.append("\"},");
 		}
 		if (userAccountList.size() > 0) {

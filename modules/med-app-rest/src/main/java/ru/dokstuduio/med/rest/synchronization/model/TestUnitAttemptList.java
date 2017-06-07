@@ -24,7 +24,7 @@ public class TestUnitAttemptList {
 			builder.append("\",\"testUnitAnswerId\":\"");
 			builder.append(testUnitAttempt.getTestUnitAnswerId());
 			builder.append("\",\"testUnitAttemptSubmitTime\":\"");
-			builder.append(testUnitAttempt.getSubmitTime());
+			builder.append(testUnitAttempt.getSubmitTime().getTime()/1000);
 			builder.append("\"},");
 		}
 		if (testUnitAttemptList.size() > 0) {

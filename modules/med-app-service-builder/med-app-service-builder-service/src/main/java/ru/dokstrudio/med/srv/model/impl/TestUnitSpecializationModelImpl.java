@@ -63,17 +63,17 @@ public class TestUnitSpecializationModelImpl extends BaseModelImpl<TestUnitSpeci
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "specializationId", Types.BIGINT },
 			{ "nameLocalizationKey", Types.VARCHAR },
-			{ "specialiationIcon", Types.VARCHAR }
+			{ "specializationIcon", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
 		TABLE_COLUMNS_MAP.put("specializationId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("nameLocalizationKey", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("specialiationIcon", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("specializationIcon", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table med_TestUnitSpecialization (specializationId LONG not null primary key,nameLocalizationKey VARCHAR(75) null,specialiationIcon VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table med_TestUnitSpecialization (specializationId LONG not null primary key,nameLocalizationKey VARCHAR(75) null,specializationIcon VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table med_TestUnitSpecialization";
 	public static final String ORDER_BY_JPQL = " ORDER BY testUnitSpecialization.specializationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY med_TestUnitSpecialization.specializationId ASC";
@@ -129,7 +129,7 @@ public class TestUnitSpecializationModelImpl extends BaseModelImpl<TestUnitSpeci
 
 		attributes.put("specializationId", getSpecializationId());
 		attributes.put("nameLocalizationKey", getNameLocalizationKey());
-		attributes.put("specialiationIcon", getSpecialiationIcon());
+		attributes.put("specializationIcon", getSpecializationIcon());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -152,10 +152,10 @@ public class TestUnitSpecializationModelImpl extends BaseModelImpl<TestUnitSpeci
 			setNameLocalizationKey(nameLocalizationKey);
 		}
 
-		String specialiationIcon = (String)attributes.get("specialiationIcon");
+		String specializationIcon = (String)attributes.get("specializationIcon");
 
-		if (specialiationIcon != null) {
-			setSpecialiationIcon(specialiationIcon);
+		if (specializationIcon != null) {
+			setSpecializationIcon(specializationIcon);
 		}
 	}
 
@@ -185,18 +185,18 @@ public class TestUnitSpecializationModelImpl extends BaseModelImpl<TestUnitSpeci
 	}
 
 	@Override
-	public String getSpecialiationIcon() {
-		if (_specialiationIcon == null) {
+	public String getSpecializationIcon() {
+		if (_specializationIcon == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _specialiationIcon;
+			return _specializationIcon;
 		}
 	}
 
 	@Override
-	public void setSpecialiationIcon(String specialiationIcon) {
-		_specialiationIcon = specialiationIcon;
+	public void setSpecializationIcon(String specializationIcon) {
+		_specializationIcon = specializationIcon;
 	}
 
 	@Override
@@ -228,7 +228,7 @@ public class TestUnitSpecializationModelImpl extends BaseModelImpl<TestUnitSpeci
 
 		testUnitSpecializationImpl.setSpecializationId(getSpecializationId());
 		testUnitSpecializationImpl.setNameLocalizationKey(getNameLocalizationKey());
-		testUnitSpecializationImpl.setSpecialiationIcon(getSpecialiationIcon());
+		testUnitSpecializationImpl.setSpecializationIcon(getSpecializationIcon());
 
 		testUnitSpecializationImpl.resetOriginalValues();
 
@@ -306,12 +306,12 @@ public class TestUnitSpecializationModelImpl extends BaseModelImpl<TestUnitSpeci
 			testUnitSpecializationCacheModel.nameLocalizationKey = null;
 		}
 
-		testUnitSpecializationCacheModel.specialiationIcon = getSpecialiationIcon();
+		testUnitSpecializationCacheModel.specializationIcon = getSpecializationIcon();
 
-		String specialiationIcon = testUnitSpecializationCacheModel.specialiationIcon;
+		String specializationIcon = testUnitSpecializationCacheModel.specializationIcon;
 
-		if ((specialiationIcon != null) && (specialiationIcon.length() == 0)) {
-			testUnitSpecializationCacheModel.specialiationIcon = null;
+		if ((specializationIcon != null) && (specializationIcon.length() == 0)) {
+			testUnitSpecializationCacheModel.specializationIcon = null;
 		}
 
 		return testUnitSpecializationCacheModel;
@@ -325,8 +325,8 @@ public class TestUnitSpecializationModelImpl extends BaseModelImpl<TestUnitSpeci
 		sb.append(getSpecializationId());
 		sb.append(", nameLocalizationKey=");
 		sb.append(getNameLocalizationKey());
-		sb.append(", specialiationIcon=");
-		sb.append(getSpecialiationIcon());
+		sb.append(", specializationIcon=");
+		sb.append(getSpecializationIcon());
 		sb.append("}");
 
 		return sb.toString();
@@ -349,8 +349,8 @@ public class TestUnitSpecializationModelImpl extends BaseModelImpl<TestUnitSpeci
 		sb.append(getNameLocalizationKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>specialiationIcon</column-name><column-value><![CDATA[");
-		sb.append(getSpecialiationIcon());
+			"<column><column-name>specializationIcon</column-name><column-value><![CDATA[");
+		sb.append(getSpecializationIcon());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -364,6 +364,6 @@ public class TestUnitSpecializationModelImpl extends BaseModelImpl<TestUnitSpeci
 		};
 	private long _specializationId;
 	private String _nameLocalizationKey;
-	private String _specialiationIcon;
+	private String _specializationIcon;
 	private TestUnitSpecialization _escapedModel;
 }

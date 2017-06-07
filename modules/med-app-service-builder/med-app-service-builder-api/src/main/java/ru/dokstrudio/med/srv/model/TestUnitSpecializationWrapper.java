@@ -60,7 +60,7 @@ public class TestUnitSpecializationWrapper implements TestUnitSpecialization,
 
 		attributes.put("specializationId", getSpecializationId());
 		attributes.put("nameLocalizationKey", getNameLocalizationKey());
-		attributes.put("specialiationIcon", getSpecialiationIcon());
+		attributes.put("specializationIcon", getSpecializationIcon());
 
 		return attributes;
 	}
@@ -80,10 +80,10 @@ public class TestUnitSpecializationWrapper implements TestUnitSpecialization,
 			setNameLocalizationKey(nameLocalizationKey);
 		}
 
-		String specialiationIcon = (String)attributes.get("specialiationIcon");
+		String specializationIcon = (String)attributes.get("specializationIcon");
 
-		if (specialiationIcon != null) {
-			setSpecialiationIcon(specialiationIcon);
+		if (specializationIcon != null) {
+			setSpecializationIcon(specializationIcon);
 		}
 	}
 
@@ -144,13 +144,13 @@ public class TestUnitSpecializationWrapper implements TestUnitSpecialization,
 	}
 
 	/**
-	* Returns the specialiation icon of this test unit specialization.
+	* Returns the specialization icon of this test unit specialization.
 	*
-	* @return the specialiation icon of this test unit specialization
+	* @return the specialization icon of this test unit specialization
 	*/
 	@Override
-	public java.lang.String getSpecialiationIcon() {
-		return _testUnitSpecialization.getSpecialiationIcon();
+	public java.lang.String getSpecializationIcon() {
+		return _testUnitSpecialization.getSpecializationIcon();
 	}
 
 	@Override
@@ -250,13 +250,13 @@ public class TestUnitSpecializationWrapper implements TestUnitSpecialization,
 	}
 
 	/**
-	* Sets the specialiation icon of this test unit specialization.
+	* Sets the specialization icon of this test unit specialization.
 	*
-	* @param specialiationIcon the specialiation icon of this test unit specialization
+	* @param specializationIcon the specialization icon of this test unit specialization
 	*/
 	@Override
-	public void setSpecialiationIcon(java.lang.String specialiationIcon) {
-		_testUnitSpecialization.setSpecialiationIcon(specialiationIcon);
+	public void setSpecializationIcon(java.lang.String specializationIcon) {
+		_testUnitSpecialization.setSpecializationIcon(specializationIcon);
 	}
 
 	/**
